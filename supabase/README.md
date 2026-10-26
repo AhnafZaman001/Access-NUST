@@ -5,7 +5,7 @@ The app uses Supabase Auth and its generated PostgREST API. Row-level security i
 ## One-time project setup
 
 1. Create your Supabase project.
-2. Run `migrations/202610260001_initial.sql` in the Supabase SQL editor. This is a one-time initial migration, wrapped in a transaction.
+2. Run `migrations/202610260001_initial.sql`, then `migrations/202610260002_access_profiles.sql` in the Supabase SQL editor. Each is a one-time migration wrapped in a transaction. For an existing installation, run only unapplied migrations.
 3. Run `seed.sql` in the same editor. It imports 65 researched records and is safe to repeat: existing records and edits are preserved. No candidate coordinates are imported.
 4. In Authentication settings, enable email/password sign-in, keep email confirmation enabled, configure the Site URL to the final Vercel origin, and configure SMTP for reliable production confirmation delivery. Validate confirmation in the real project before accepting users.
 5. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to Vercel's environment settings and rebuild. These are public client configuration, protected by database policies. Never use a service-role key here.
@@ -36,3 +36,12 @@ Account deletion can be performed by the owner in Supabase Auth after confirming
 `npm run test:e2e` currently exercises the unconfigured directory and guest mode. Real signup, confirmation, signed-in bookmarking, admin editing and deployment still need a smoke test after configuration.
 
 The initial admin interface loads up to 500 campus records and 200 profiles. Pagination and auditing are future production work if usage exceeds those limits. No verified route engine is implemented.
+
+
+## Upgrade: mobility access profiles
+
+If the initial schema is already installed, run only `migrations/202610260002_access_profiles.sql`. Do not rerun the initial migration or reset the database. This adds a separate `access_profiles` table and policies without changing existing records.
+
+Signed-in users can voluntarily submit their campus role, mobility aids, barriers, facilities needed, assistance needs and up to ten regular destinations. Consent is required. Other questions are optional. Users can edit or delete their access profile. Only its owner and the site administrator can read it. Admin can see submitted responses under User profiles and delete a response when requested. Guest responses stay in browser storage and are never automatically uploaded at sign-in. No diagnoses, medical documents, continuous location or visit tracking is collected.
+
+The old `Prefer quiet spaces` preference is no longer offered. Existing database values are retained for compatibility and hidden in the user interface; users' prior records are not bulk-deleted. This does not affect the new mobility-specific profile fields.

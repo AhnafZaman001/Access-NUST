@@ -1,6 +1,6 @@
 # Access NUST
 
-Independent campus-accessibility directory for NUST H-12, Islamabad. Next.js/React frontend, Supabase Auth/Postgres backend, and Vercel deployment support.
+Disability and mobility access at NUST H-12, Islamabad, with a focus on wheelchair users, physical access barriers, and access-needs profiles. Next.js/React frontend, Supabase Auth/Postgres backend, and Vercel deployment support.
 
 ## Run
 
@@ -20,9 +20,11 @@ Without Supabase configuration, the public app serves 65 researched records and 
 - Search and category filters across researched campus records.
 - Campus-guide marker numbers, evidence links, source-access limitations and accessibility status on place cards.
 - Map pins only for reviewed coordinates. All initial coordinates are null; there are no fabricated facility or route pins.
-- Optional accounts, persistent private preferences/bookmarks when connected, separate browser-only guest state.
+- Optional accounts, private preferences/bookmarks, and a voluntary access-needs profile covering mobility aids, barriers, required facilities, assistance and regular destinations.
+- Explicit consent, optional questions, profile editing/deletion, and administrator visibility disclosed before submission. Guest answers remain on the browser.
 - Admin place creation, editing, publishing, deletion, coordinate review, accessibility observations and supporting evidence; profile management.
 - Responsive layout, map/list parity, keyboard focus containment and reduced-motion support.
+- Ordinary trackpad scrolling moves the page; intentional Ctrl+wheel/pinch zooms around the map centre in controlled increments. Zoom buttons and touchscreen pinch remain available.
 
 ## Backend setup
 
@@ -73,3 +75,5 @@ Use the actual path printed. Database tests run the real schema/policies locally
 Import `AhnafZaman001/Access-NUST` into Vercel as a Next.js project. Build command: `npm run build`. Add the public Supabase configuration and rebuild when the database is ready. Configure the matching Auth Site URL in Supabase. Map tiles require browser access to `tile.openstreetmap.org` and retain OpenStreetMap attribution.
 
 Before accepting real users, verify email confirmation, two-user privacy, owner-only admin access, saving across devices, and published changes on the deployed site. Establish a contact and account-deletion process. No continuous location tracking, medical-history collection or verified route engine is implemented.
+
+Existing Supabase projects must apply `supabase/migrations/202610260002_access_profiles.sql` before collecting signed-in access profiles. Existing accounts and campus data are preserved.

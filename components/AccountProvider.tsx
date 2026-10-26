@@ -13,7 +13,6 @@ export const preferenceOptions = [
   "Avoid steps",
   "Prefer gentle slopes",
   "Find accessible washrooms",
-  "Prefer quiet spaces",
 ];
 type Account = {
   user: User | null;
@@ -90,7 +89,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         );
         return;
       }
-      setPrefs(profile.data?.preferences || []);
+      setPrefs(
+        (profile.data?.preferences || []).filter((x: string) =>
+          preferenceOptions.includes(x),
+        ),
+      );
       setSaved((bookmarks.data || []).map((x) => x.place_id));
       setAdmin(role.data === true);
       setReady(true);

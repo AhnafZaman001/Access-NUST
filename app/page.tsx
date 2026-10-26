@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import {
   Accessibility,
@@ -36,9 +36,10 @@ const CampusMap = dynamic(() => import("@/components/CampusMap"), {
   loading: () => <div className="map-loading">Preparing your campus map…</div>,
 });
 export default function Home() {
-  const [tab, setTab] = useState("Explore campus");
+  const [tab, setTab] = useState("Access directory");
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All places");
+  const [accessFilter, setAccessFilter] = useState("All access records");
   const [selected, setSelected] = useState("nust-medical-centre");
   const account = useAccount();
   const saved = account.saved;
@@ -81,13 +82,27 @@ export default function Home() {
   const select = useCallback((id: string) => {
     setSelected(id);
   }, []);
-  const filtered = places.filter(
-    (p) =>
-      (filter === "All places" || p.category === filter) &&
-      (tab !== "Saved places" || saved.includes(p.id)) &&
-      (p.name + " " + p.area + " " + p.aliases.join(" "))
-        .toLowerCase()
-        .includes(query.toLowerCase()),
+  const filtered = useMemo(
+    () =>
+      places.filter(
+        (p) =>
+          (filter === "All places" || p.category === filter) &&
+          (tab !== "Saved places" || saved.includes(p.id)) &&
+          (p.name + " " + p.area + " " + p.aliases.join(" "))
+            .toLowerCase()
+            .includes(query.toLowerCase()) &&
+          (accessFilter === "All access records" ||
+            (accessFilter === "Medical support"
+              ? p.category === "Medical"
+              : p.accessibility[
+                  accessFilter === "Step-free entrances"
+                    ? "stepFreeEntrance"
+                    : accessFilter === "Accessible washrooms"
+                      ? "accessibleWashroom"
+                      : "ramp"
+                ] === "yes")),
+      ),
+    [places, filter, tab, saved, query, accessFilter],
   );
   const current = filtered.find((p) => p.id === selected) || filtered[0];
   const toggleSave = async (id: string) => {
@@ -125,15 +140,15 @@ export default function Home() {
           </span>
           <span>
             access<span className="brand-light">nust</span>
-            <small>A CAMPUS FOR EVERYONE</small>
+            <small>DISABILITY & MOBILITY ACCESS</small>
           </span>
         </a>
         <nav aria-label="Main navigation">
           <button
-            className={tab === "Explore campus" ? "nav-active" : ""}
-            onClick={() => setTab("Explore campus")}
+            className={tab === "Access directory" ? "nav-active" : ""}
+            onClick={() => setTab("Access directory")}
           >
-            Explore campus
+            Access directory
           </button>
           <button
             className={tab === "Saved places" ? "nav-active" : ""}
@@ -167,27 +182,27 @@ export default function Home() {
         <section className="hero">
           <div>
             <div className="eyebrow">
-              <span /> INDEPENDENT INITIATIVE · NUST H-12
+              <span /> FOR DISABLED STUDENTS & VISITORS · NUST H-12
             </div>
             <h1>
-              Your campus.
+              Campus access.
               <br />
-              <span>More possibilities.</span>
+              <span>Your needs come first.</span>
             </h1>
             <p>
-              Find the spaces that work for you.
-              <br className="mobile-break" /> Explore a more accessible NUST,
-              one place at a time.
+              Wheelchair access, step-free entrances, ramps, and accessible
+              washrooms. Built for students and visitors with disabilities and
+              mobility needs at NUST H-12.
             </p>
             <div className="hero-actions">
-              <a className="primary" href="#explore">
-                Explore the map <ArrowRight size={17} />
-              </a>
+              <Link className="primary" href="/account#access-profile">
+                Tell us your access needs <ArrowRight size={17} />
+              </Link>
               <button
                 className="text-button"
                 onClick={() => setModal("preferences")}
               >
-                <SlidersHorizontal size={16} /> Make it yours
+                <SlidersHorizontal size={16} /> Access preferences
               </button>
             </div>
           </div>
@@ -209,36 +224,61 @@ export default function Home() {
                 <Check size={17} />
               </span>
               <div>
-                Designed around you
-                <small>Different needs. Shared possibilities.</small>
+                Designed for mobility access
+                <small>Wheelchairs. Ramps. Step-free access.</small>
               </div>
             </div>
             <span className="art-label">
-              A little more access.
-              <br />A lot more independence.
+              Fewer barriers.
+              <br />
+              More independence.
             </span>
           </div>
         </section>
         <section className="explorer" id="explore">
           <div className="section-heading">
             <div>
-              <div className="eyebrow muted">FIND YOUR WAY</div>
+              <div className="eyebrow muted">WHEELCHAIR & MOBILITY ACCESS</div>
               <h2>
                 {tab === "Saved places"
                   ? "Your saved places"
-                  : "Explore your campus"}
+                  : "Find campus access information"}
               </h2>
             </div>
             <span className="campus-badge">
               <MapPin size={14} /> H-12, Islamabad <span className="dot" />
             </span>
           </div>
+          <div
+            className="access-focus-filters"
+            aria-label="Accessibility filters"
+          >
+            {[
+              "All access records",
+              "Step-free entrances",
+              "Accessible washrooms",
+              "Ramps",
+              "Medical support",
+            ].map((f) => (
+              <button
+                key={f}
+                aria-pressed={accessFilter === f}
+                onClick={() => setAccessFilter(f)}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+          <p className="access-filter-note">
+            Accessibility filters show reported facilities only. Unknown does
+            not mean accessible or inaccessible.
+          </p>
           <div className="toolbar">
             <label className="search">
               <Search size={19} />
               <input
                 aria-label="Search campus places"
-                placeholder="Search a building, facility, or space…"
+                placeholder="Search a destination to check its access details…"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -266,7 +306,7 @@ export default function Home() {
           <div className="workspace">
             <aside className="results" aria-label="Campus places">
               <div className="result-heading">
-                <strong>{filtered.length} places to explore</strong>
+                <strong>{filtered.length} access records</strong>
                 <span>
                   {source === "supabase"
                     ? "CAMPUS DIRECTORY"
@@ -280,21 +320,26 @@ export default function Home() {
                     <h3>
                       {tab === "Saved places"
                         ? "Your places, all together"
-                        : "No matching places"}
+                        : accessFilter !== "All access records"
+                          ? "No matching access reports yet"
+                          : "No matching places"}
                     </h3>
                     <p>
                       {tab === "Saved places"
                         ? "Save a place from the map to find it here."
-                        : "Try another name or category."}
+                        : accessFilter !== "All access records"
+                          ? "We have not documented this facility yet. This does not mean it is absent. Your access profile helps prioritize reviews."
+                          : "Try another name or category."}
                     </p>
                     <button
                       onClick={() => {
+                        setAccessFilter("All access records");
                         setQuery("");
                         setFilter("All places");
-                        setTab("Explore campus");
+                        setTab("Access directory");
                       }}
                     >
-                      Explore all places
+                      Show all access records
                     </button>
                   </div>
                 ) : (
@@ -465,15 +510,15 @@ export default function Home() {
             <Heart size={24} />
           </div>
           <div>
-            <h3>Access is a shared responsibility.</h3>
+            <h3>Your access needs should be heard.</h3>
             <p>
-              Our vision: a campus where everyone can move with greater
-              independence.
+              Share the mobility barriers you face and the places you need to
+              reach. Help prioritize accessibility reviews at NUST.
             </p>
           </div>
-          <button className="text-button" onClick={() => setModal("about")}>
-            Meet the mission <ArrowUpRight size={16} />
-          </button>
+          <Link className="text-button" href="/account#access-profile">
+            Build your access profile <ArrowUpRight size={16} />
+          </Link>
         </section>
       </main>
       <footer>
@@ -481,8 +526,8 @@ export default function Home() {
           access<span>nust</span>
         </span>
         <p>
-          Built for belonging. An independent initiative, not an official NUST
-          service.
+          Built for disability access. An independent initiative, not an
+          official NUST service.
         </p>
         <Link href="/admin" className="admin-link">
           <ShieldCheck size={14} /> Campus administration
@@ -499,7 +544,7 @@ export default function Home() {
           title={
             modal === "preferences"
               ? "A campus experience for you"
-              : "More access. More independence."
+              : "Disability access belongs at the centre."
           }
           close={() => setModal(null)}
         >
@@ -545,10 +590,10 @@ export default function Home() {
           ) : (
             <>
               <p>
-                Access NUST is an independent initiative for students and
-                visitors at NUST H-12, Islamabad. Our goal is to make
-                accessibility information easier to find, understand, and
-                improve.
+                Access NUST is an independent disability-access initiative for
+                NUST H-12, Islamabad. We focus on wheelchair users and people
+                with mobility needs: step-free entrances, ramps, lifts,
+                accessible washrooms, and barriers between destinations.
               </p>
               <h3>Honest information comes first</h3>
               <p>

@@ -17,15 +17,49 @@ export default function CampusMap({
   const group = useRef<LayerGroup | null>(null);
   const [ready, setReady] = useState(false);
   const [offline, setOffline] = useState(false);
+  const [zoom, setZoom] = useState(16);
   useEffect(() => {
     let cancelled = false;
+    let removeWheel: (() => void) | undefined;
     import("leaflet").then((L) => {
       if (cancelled || !host.current) return;
-      const m = L.map(host.current, { zoomControl: false }).setView(
-        [33.6443, 72.9905],
-        16,
-      );
+      const m = L.map(host.current, {
+        zoomControl: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        touchZoom: "center",
+        zoomAnimation: false,
+        inertia: false,
+        zoomSnap: 0.5,
+        zoomDelta: 1,
+        minZoom: 14,
+        maxZoom: 19,
+      }).setView([33.6443, 72.9905], 16);
       map.current = m;
+      m.on("zoomend", () => setZoom(m.getZoom()));
+      // Ordinary wheel/trackpad scrolling belongs to the page. Desktop pinch
+      // arrives as Ctrl+wheel; zoom around the map centre to avoid cursor jumps.
+      let delta = 0;
+      let lastStep = 0;
+      const wheel = (event: WheelEvent) => {
+        if (!event.ctrlKey) return;
+        event.preventDefault();
+        delta +=
+          event.deltaY *
+          (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 200 : 1);
+        const now = performance.now();
+        if (Math.abs(delta) >= 8 && now - lastStep >= 90) {
+          m.setZoom(
+            Math.max(14, Math.min(19, m.getZoom() + (delta < 0 ? 0.5 : -0.5))),
+            { animate: false },
+          );
+          delta = 0;
+          lastStep = now;
+        }
+      };
+      host.current.addEventListener("wheel", wheel, { passive: false });
+      const element = host.current;
+      removeWheel = () => element.removeEventListener("wheel", wheel);
       L.control.zoom({ position: "bottomright" }).addTo(m);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
@@ -39,6 +73,7 @@ export default function CampusMap({
     });
     return () => {
       cancelled = true;
+      removeWheel?.();
       map.current?.remove();
       map.current = null;
     };
@@ -69,6 +104,10 @@ export default function CampusMap({
   }, [places, selected, ready, onSelect]);
   return (
     <>
+      <div className="map-gesture-help">
+        Scroll to move the page · Pinch or use + / − to zoom{" "}
+        <span data-testid="map-zoom">Zoom {zoom}</span>
+      </div>
       <div
         ref={host}
         className="map-canvas"

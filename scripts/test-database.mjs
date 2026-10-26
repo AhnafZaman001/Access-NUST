@@ -9,9 +9,11 @@ const owner = "11111111-1111-4111-8111-111111111111",
 await db.exec(
   `create role anon; create role authenticated; create schema auth; create table auth.users(id uuid primary key); create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$; grant usage on schema public,auth to anon,authenticated; grant execute on function auth.uid() to anon,authenticated;`,
 );
-await db.exec(
-  fs.readFileSync("supabase/migrations/202610260001_initial.sql", "utf8"),
-);
+for (const file of fs
+  .readdirSync("supabase/migrations")
+  .filter((f) => f.endsWith(".sql"))
+  .sort())
+  await db.exec(fs.readFileSync("supabase/migrations/" + file, "utf8"));
 await db.exec(fs.readFileSync("supabase/seed.sql", "utf8"));
 const result = await db.query(
   "select count(*)::int as count from public.places",
@@ -145,6 +147,62 @@ await as("authenticated", admin);
 await db.exec("delete from places where id='nust-medical-centre'");
 await as("authenticated", owner);
 assert.equal((await db.query("select * from saved_places")).rows.length, 0);
+checks++;
+
+// Access profiles collect only bounded functional needs after explicit consent.
+await as("anon");
+await denied("select * from access_profiles");
+await as("authenticated", owner);
+await denied(
+  `insert into access_profiles(user_id,role) values('${owner}','Student')`,
+);
+await denied(
+  `insert into access_profiles(user_id,role,consent_version,consented_at) values('${other}','Student','access-profile-v1',now())`,
+);
+await db.exec(
+  `insert into access_profiles(user_id,role,mobility_aids,barriers,facilities,consent_version,consented_at) values('${owner}','Student',array['Manual wheelchair'],array['Steps or stairs'],array['Ramp'],'access-profile-v1',now())`,
+);
+assert.equal((await db.query("select * from access_profiles")).rows.length, 1);
+checks++;
+await denied(
+  `update access_profiles set mobility_aids=array['Prefer not to say','Manual wheelchair'] where user_id='${owner}'`,
+);
+await denied(
+  `update access_profiles set barriers=array['unsupported diagnosis'] where user_id='${owner}'`,
+);
+await denied(
+  `update access_profiles set facilities=array[null]::text[] where user_id='${owner}'`,
+);
+await denied(
+  `update access_profiles set frequent_place_ids=array_fill('place'::text,array[11]) where user_id='${owner}'`,
+);
+await as("authenticated", other);
+assert.equal((await db.query("select * from access_profiles")).rows.length, 0);
+checks++;
+assert.equal(
+  (
+    await db.query(
+      `update access_profiles set role='Visitor' where user_id='${owner}' returning user_id`,
+    )
+  ).rows.length,
+  0,
+);
+checks++;
+assert.equal(
+  (
+    await db.query(
+      `delete from access_profiles where user_id='${owner}' returning user_id`,
+    )
+  ).rows.length,
+  0,
+);
+checks++;
+await as("authenticated", admin);
+assert.equal((await db.query("select * from access_profiles")).rows.length, 1);
+checks++;
+await as("authenticated", owner);
+await db.exec(`delete from access_profiles where user_id='${owner}'`);
+assert.equal((await db.query("select * from access_profiles")).rows.length, 0);
 checks++;
 await db.close();
 console.log(

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import AccessProfileForm from "@/components/AccessProfileForm";
 import { useState, type FormEvent } from "react";
 import { useAccount, preferenceOptions } from "@/components/AccountProvider";
 import { getSupabase } from "@/lib/supabase/client";
@@ -39,15 +40,17 @@ export default function Account() {
         ← Back to campus
       </Link>
       <div className="account-shell">
-        <span className="eyebrow">ACCESS NUST · YOUR SPACE</span>
+        <span className="eyebrow">
+          ACCESS NUST · DISABILITY & MOBILITY ACCESS
+        </span>
         <h1>
-          Your campus,
+          Your access needs,
           <br />
-          <span>your preferences.</span>
+          <span>your voice.</span>
         </h1>
         <p>
-          Save places and choose functional preferences. No medical history
-          required.
+          Tell us about mobility barriers, facilities you need, and regular
+          destinations. Help shape a more accessible NUST.
         </p>
         {!account.configured ? (
           <div className="setup-panel">
@@ -99,7 +102,7 @@ export default function Account() {
             ))}
             <div className="account-actions">
               <Link href="/" className="primary">
-                Explore saved places
+                View saved access records
               </Link>
               {account.isAdmin && (
                 <Link href="/admin">Open administration →</Link>
@@ -193,6 +196,7 @@ export default function Account() {
             </p>
           </form>
         )}
+        <AccessProfileForm />
         {message && (
           <p className="account-message" role="status">
             {message}

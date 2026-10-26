@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import AdminAccessResponses from "@/components/AdminAccessResponses";
 import { useEffect, useState, type FormEvent } from "react";
 import { useAccount, preferenceOptions } from "@/components/AccountProvider";
 import { getSupabase } from "@/lib/supabase/client";
@@ -259,6 +260,7 @@ export default function Admin() {
           )}
           {tab === "profiles" ? (
             <section className="profile-grid">
+              <AdminAccessResponses />
               <p>
                 Profiles contain display names and functional preferences only.
                 Bookmarks are private to each user. Up to 200 profiles are
