@@ -1,26 +1,635 @@
-'use client';
-import {useState,useEffect,useCallback,useRef} from 'react';
-import dynamic from 'next/dynamic';
-import {Accessibility, ArrowUpRight, ArrowRight, MapPin, Search, SlidersHorizontal, Bookmark, Heart, ShieldCheck, X, Check, Navigation, Settings2, Plus, Minus, Layers, Info, Building2, ChevronRight, Menu} from 'lucide-react';
-import {initialPlaces,type Category} from '@/lib/places';
-const CampusMap=dynamic(()=>import('@/components/CampusMap'),{ssr:false,loading:()=> <div className="map-loading">Preparing your campus map…</div>});
-const categories:Category[]=['Entrances','Washrooms','Medical','Study spaces'];
-export default function Home(){
- const [tab,setTab]=useState('Explore campus');const [query,setQuery]=useState('');const [filter,setFilter]=useState('All places');const [selected,setSelected]=useState(1);const [saved,setSaved]=useState<number[]>([]);const [prefs,setPrefs]=useState<string[]>([]);const [modal,setModal]=useState<'preferences'|'about'|'admin'|null>(null);const [route,setRoute]=useState(false);const [places,setPlaces]=useState(initialPlaces);const [notice,setNotice]=useState('');const [loaded,setLoaded]=useState(false);
- useEffect(()=>{try{const s=JSON.parse(localStorage.getItem('access-nust-saved')||'[]');const p=JSON.parse(localStorage.getItem('access-nust-prefs')||'[]');if(Array.isArray(s))setSaved(s.filter(x=>typeof x==='number'));if(Array.isArray(p))setPrefs(p.filter(x=>typeof x==='string'));}catch{}setLoaded(true)},[]);
- useEffect(()=>{if(loaded)try{localStorage.setItem('access-nust-saved',JSON.stringify(saved));localStorage.setItem('access-nust-prefs',JSON.stringify(prefs))}catch{}},[saved,prefs,loaded]);
- useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),3500);return()=>clearTimeout(timer)},[notice]);
- const select=useCallback((id:number)=>{setSelected(id);setRoute(false)},[]);
- const filtered=places.filter(p=>(filter==='All places'||p.category===filter)&&(tab!=='Saved places'||saved.includes(p.id))&&(p.name+' '+p.area).toLowerCase().includes(query.toLowerCase()));
- const current=filtered.find(p=>p.id===selected)||filtered[0];
- const toggleSave=(id:number)=>setSaved(s=>s.includes(id)?s.filter(x=>x!==id):[...s,id]);
- return <><a className="skip" href="#explore">Skip to campus explorer</a><header className="header"><a href="/" className="brand"><span className="brand-mark"><Accessibility size={24}/></span><span>access<span className="brand-light">nust</span><small>A CAMPUS FOR EVERYONE</small></span></a><nav aria-label="Main navigation"><button className={tab==='Explore campus'?'nav-active':''} onClick={()=>setTab('Explore campus')}>Explore campus</button><button className={tab==='Saved places'?'nav-active':''} onClick={()=>setTab('Saved places')}>Saved places {saved.length>0&&<span className="count">{saved.length}</span>}</button><button onClick={()=>setModal('about')}>Our mission <ArrowUpRight size={13}/></button></nav><button className="profile-button" onClick={()=>setModal('preferences')}><span className="avatar">Y</span><span>Your preferences</span><Settings2 size={16}/></button></header>
- <main><section className="hero"><div><div className="eyebrow"><span/> INDEPENDENT INITIATIVE · NUST H-12</div><h1>Your campus.<br/><span>More possibilities.</span></h1><p>Find the spaces that work for you.<br className="mobile-break"/> Explore a more accessible NUST, one place at a time.</p><div className="hero-actions"><a className="primary" href="#explore">Explore the map <ArrowRight size={17}/></a><button className="text-button" onClick={()=>setModal('preferences')}><SlidersHorizontal size={16}/> Make it yours</button></div></div><div className="hero-art" aria-hidden="true"><div className="art-grid"/><div className="art-path"/><div className="art-orbit"/><span className="art-pin pin-a"><Accessibility size={31}/></span><span className="art-pin pin-b"><Heart size={22}/></span><span className="art-pin pin-c"><Building2 size={22}/></span><div className="art-card"><span className="mini-check"><Check size={17}/></span><div>Designed around you<small>Different needs. Shared possibilities.</small></div></div><span className="art-label">A little more access.<br/>A lot more independence.</span></div></section>
- <section className="explorer" id="explore"><div className="section-heading"><div><div className="eyebrow muted">FIND YOUR WAY</div><h2>{tab==='Saved places'?'Your saved places':'Explore your campus'}</h2></div><span className="campus-badge"><MapPin size={14}/> H-12, Islamabad <span className="dot"/></span></div><div className="toolbar"><label className="search"><Search size={19}/><input aria-label="Search campus places" placeholder="Search a building, facility, or space…" value={query} onChange={e=>setQuery(e.target.value)}/>{query&&<button aria-label="Clear search" onClick={()=>setQuery('')}><X size={16}/></button>}</label><div className="filters" aria-label="Place categories">{['All places',...categories].map(c=><button key={c} aria-pressed={filter===c} className={filter===c?'filter active':'filter'} onClick={()=>{setFilter(c);setRoute(false)}}>{c==='All places'&&<Layers size={14}/>} {c}</button>)}</div></div>
- <div className="workspace"><aside className="results" aria-label="Campus places"><div className="result-heading"><strong>{filtered.length} places to explore</strong><span>DEMO COLLECTION</span></div><div className="place-list">{filtered.length===0?<div className="empty"><Bookmark/><h3>{tab==='Saved places'?'Your places, all together':'No matching places'}</h3><p>{tab==='Saved places'?'Save a place from the map to find it here.':'Try another name or category.'}</p><button onClick={()=>{setQuery('');setFilter('All places');setTab('Explore campus')}}>Explore all places</button></div>:filtered.map(p=><article key={p.id} className={'place-card '+(current?.id===p.id?'chosen':'')}><button className="place-select" onClick={()=>select(p.id)} aria-pressed={current?.id===p.id}><span className={'place-icon icon-'+p.category.split(' ')[0]}>{p.category==='Medical'?<Heart size={20}/>:p.category==='Study spaces'?<Building2 size={20}/>:p.category==='Washrooms'?<Accessibility size={20}/>:<ArrowUpRight size={20}/>}</span><span className="place-copy"><small>{p.category}</small><strong>{p.name}</strong><span><MapPin size={11}/>{p.area}</span></span><ChevronRight size={15}/></button><div className="place-bottom"><span className="sample-dot"/> Sample · needs verification<button aria-label={(saved.includes(p.id)?'Unsave ':'Save ')+p.name} aria-pressed={saved.includes(p.id)} onClick={()=>toggleSave(p.id)}><Bookmark size={16} fill={saved.includes(p.id)?'currentColor':'none'}/></button></div></article>)}</div><div className="list-footer"><Info size={15}/><span>Better information. More confident choices.</span></div></aside><div className="map-panel"><CampusMap places={filtered} selected={current?.id||0} onSelect={select} route={route}/><div className="map-chip"><span className="live-dot"/> NUST H-12 <span>Campus explorer</span></div><div className="map-disclaimer"><Info size={13}/> Illustrative pins · accessibility not verified</div>{current&&<div className="detail-card"><div className="detail-top"><span className="detail-kicker">{route?'ROUTE PREVIEW':'TAKE A CLOSER LOOK'}</span><button aria-label={(saved.includes(current.id)?'Unsave ':'Save ')+current.name+' from details'} onClick={()=>toggleSave(current.id)}><Bookmark size={18} fill={saved.includes(current.id)?'currentColor':'none'}/></button></div><h3>{current.name}</h3><p>{route?'Illustrative route only. Path continuity, gradients and barriers have not been checked. Do not use this preview for navigation.':current.note}</p><div className="feature-tags">{current.features.map(f=><span key={f}>{f}</span>)}</div><button className="route-button" onClick={()=>setRoute(r=>!r)}><Navigation size={16}/>{route?'Close route preview':'Preview a sample route'}<ArrowRight size={16}/></button></div>}</div></div><p className="data-note"><Info size={14}/> This is a concept demo. Pins, facility details, and routes are illustrative—not verified access guidance. <button onClick={()=>setModal('about')}>About our data <ArrowUpRight size={12}/></button></p></section>
- <section className="mission-strip"><div className="mission-icon"><Heart size={24}/></div><div><h3>Access is a shared responsibility.</h3><p>Our vision: a campus where everyone can move with greater independence.</p></div><button className="text-button" onClick={()=>setModal('about')}>Meet the mission <ArrowUpRight size={16}/></button></section></main><footer><span className="footer-brand">access<span>nust</span></span><p>Built for belonging. An independent initiative, not an official NUST service.</p><button onClick={()=>setModal('admin')}><ShieldCheck size={14}/> Admin demo</button></footer>
- {notice&&<div className="toast" role="status"><Check size={17}/>{notice}</div>}
- {modal&&<Modal title={modal==='preferences'?'A campus experience for you':modal==='admin'?'Campus management':'More access. More independence.'} close={()=>setModal(null)}>{modal==='preferences'?<><p>Choose what matters to you. Preferences are saved on this browser only; they do not certify routes or filter unverified features.</p><div className="preference-options">{['Avoid steps','Prefer gentle slopes','Find accessible washrooms','Prefer quiet spaces'].map(p=><label key={p}><span>{p}</span><input type="checkbox" checked={prefs.includes(p)} onChange={()=>setPrefs(a=>a.includes(p)?a.filter(x=>x!==p):[...a,p])}/></label>)}</div><p className="privacy-note">No diagnosis needed. We do not track your location or send these preferences to a server.</p><button className="primary full" onClick={()=>{setModal(null);setNotice('Your preferences are saved on this browser')}}>Save preferences <Check size={17}/></button></>:modal==='about'?<><p>Access NUST is an independent initiative for students and visitors at NUST H-12, Islamabad. Our goal is to make accessibility information easier to find, understand, and improve.</p><h3>Honest information comes first</h3><p>This prototype uses illustrative coordinates and facility records. No accessibility claims have been verified. Map tiles are provided by OpenStreetMap; they do not establish wheelchair access.</p><h3>From demonstration to dependable data</h3><p>The next stage is a campus survey: document entrances, measure ramps, check washroom facilities, and record who verified each detail and when.</p><a className="source-link" href="https://nust.edu.pk" target="_blank" rel="noreferrer">NUST official website <ArrowUpRight size={14}/></a><p className="privacy-note">Official campus information could not be retrieved during development. This link is a reference destination, not evidence for the sample records.</p></>:<><div className="admin-banner"><ShieldCheck size={18}/> Interface preview only · no authentication</div><p>Try editing a sample location name. Changes last for this page session. No student records are collected or shown.</p><div className="admin-records">{places.map(p=><label key={p.id}><span>{p.category}</span><input aria-label={'Edit '+initialPlaces.find(x=>x.id===p.id)?.name} value={p.name} maxLength={70} onChange={e=>setPlaces(a=>a.map(x=>x.id===p.id?{...x,name:e.target.value}:x))}/></label>)}</div><button className="primary full" onClick={()=>{setModal(null);setNotice('Demo location changes applied for this session')}}>Apply demo changes <Check size={16}/></button><p className="privacy-note">Production administration will require Supabase authentication and server-enforced permissions.</p></>}</Modal>}
- </>;
+"use client";
+import { useState, useEffect, useCallback, useRef } from "react";
+import dynamic from "next/dynamic";
+import {
+  Accessibility,
+  ArrowUpRight,
+  ArrowRight,
+  MapPin,
+  Search,
+  SlidersHorizontal,
+  Bookmark,
+  Heart,
+  ShieldCheck,
+  X,
+  Check,
+  Navigation,
+  Settings2,
+  Plus,
+  Minus,
+  Layers,
+  Info,
+  Building2,
+  ChevronRight,
+  Menu,
+} from "lucide-react";
+import { initialPlaces, type Category } from "@/lib/places";
+const CampusMap = dynamic(() => import("@/components/CampusMap"), {
+  ssr: false,
+  loading: () => <div className="map-loading">Preparing your campus map…</div>,
+});
+const categories: Category[] = [
+  "Entrances",
+  "Washrooms",
+  "Medical",
+  "Study spaces",
+];
+export default function Home() {
+  const [tab, setTab] = useState("Explore campus");
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("All places");
+  const [selected, setSelected] = useState(1);
+  const [saved, setSaved] = useState<number[]>([]);
+  const [prefs, setPrefs] = useState<string[]>([]);
+  const [modal, setModal] = useState<"preferences" | "about" | "admin" | null>(
+    null,
+  );
+  const [route, setRoute] = useState(false);
+  const [places, setPlaces] = useState(initialPlaces);
+  const [notice, setNotice] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    try {
+      const s = JSON.parse(localStorage.getItem("access-nust-saved") || "[]");
+      const p = JSON.parse(localStorage.getItem("access-nust-prefs") || "[]");
+      if (Array.isArray(s)) setSaved(s.filter((x) => typeof x === "number"));
+      if (Array.isArray(p)) setPrefs(p.filter((x) => typeof x === "string"));
+    } catch {}
+    setLoaded(true);
+  }, []);
+  useEffect(() => {
+    if (loaded)
+      try {
+        localStorage.setItem("access-nust-saved", JSON.stringify(saved));
+        localStorage.setItem("access-nust-prefs", JSON.stringify(prefs));
+      } catch {}
+  }, [saved, prefs, loaded]);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(""), 3500);
+    return () => clearTimeout(timer);
+  }, [notice]);
+  const select = useCallback((id: number) => {
+    setSelected(id);
+    setRoute(false);
+  }, []);
+  const filtered = places.filter(
+    (p) =>
+      (filter === "All places" || p.category === filter) &&
+      (tab !== "Saved places" || saved.includes(p.id)) &&
+      (p.name + " " + p.area).toLowerCase().includes(query.toLowerCase()),
+  );
+  const current = filtered.find((p) => p.id === selected) || filtered[0];
+  const toggleSave = (id: number) =>
+    setSaved((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  return (
+    <>
+      <a className="skip" href="#explore">
+        Skip to campus explorer
+      </a>
+      <header className="header">
+        <a href="/" className="brand">
+          <span className="brand-mark">
+            <Accessibility size={24} />
+          </span>
+          <span>
+            access<span className="brand-light">nust</span>
+            <small>A CAMPUS FOR EVERYONE</small>
+          </span>
+        </a>
+        <nav aria-label="Main navigation">
+          <button
+            className={tab === "Explore campus" ? "nav-active" : ""}
+            onClick={() => setTab("Explore campus")}
+          >
+            Explore campus
+          </button>
+          <button
+            className={tab === "Saved places" ? "nav-active" : ""}
+            onClick={() => setTab("Saved places")}
+          >
+            Saved places{" "}
+            {saved.length > 0 && <span className="count">{saved.length}</span>}
+          </button>
+          <button onClick={() => setModal("about")}>
+            Our mission <ArrowUpRight size={13} />
+          </button>
+        </nav>
+        <button
+          className="profile-button"
+          onClick={() => setModal("preferences")}
+        >
+          <span className="avatar">Y</span>
+          <span>Your preferences</span>
+          <Settings2 size={16} />
+        </button>
+      </header>
+      <main>
+        <section className="hero">
+          <div>
+            <div className="eyebrow">
+              <span /> INDEPENDENT INITIATIVE · NUST H-12
+            </div>
+            <h1>
+              Your campus.
+              <br />
+              <span>More possibilities.</span>
+            </h1>
+            <p>
+              Find the spaces that work for you.
+              <br className="mobile-break" /> Explore a more accessible NUST,
+              one place at a time.
+            </p>
+            <div className="hero-actions">
+              <a className="primary" href="#explore">
+                Explore the map <ArrowRight size={17} />
+              </a>
+              <button
+                className="text-button"
+                onClick={() => setModal("preferences")}
+              >
+                <SlidersHorizontal size={16} /> Make it yours
+              </button>
+            </div>
+          </div>
+          <div className="hero-art" aria-hidden="true">
+            <div className="art-grid" />
+            <div className="art-path" />
+            <div className="art-orbit" />
+            <span className="art-pin pin-a">
+              <Accessibility size={31} />
+            </span>
+            <span className="art-pin pin-b">
+              <Heart size={22} />
+            </span>
+            <span className="art-pin pin-c">
+              <Building2 size={22} />
+            </span>
+            <div className="art-card">
+              <span className="mini-check">
+                <Check size={17} />
+              </span>
+              <div>
+                Designed around you
+                <small>Different needs. Shared possibilities.</small>
+              </div>
+            </div>
+            <span className="art-label">
+              A little more access.
+              <br />A lot more independence.
+            </span>
+          </div>
+        </section>
+        <section className="explorer" id="explore">
+          <div className="section-heading">
+            <div>
+              <div className="eyebrow muted">FIND YOUR WAY</div>
+              <h2>
+                {tab === "Saved places"
+                  ? "Your saved places"
+                  : "Explore your campus"}
+              </h2>
+            </div>
+            <span className="campus-badge">
+              <MapPin size={14} /> H-12, Islamabad <span className="dot" />
+            </span>
+          </div>
+          <div className="toolbar">
+            <label className="search">
+              <Search size={19} />
+              <input
+                aria-label="Search campus places"
+                placeholder="Search a building, facility, or space…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              {query && (
+                <button aria-label="Clear search" onClick={() => setQuery("")}>
+                  <X size={16} />
+                </button>
+              )}
+            </label>
+            <div className="filters" aria-label="Place categories">
+              {["All places", ...categories].map((c) => (
+                <button
+                  key={c}
+                  aria-pressed={filter === c}
+                  className={filter === c ? "filter active" : "filter"}
+                  onClick={() => {
+                    setFilter(c);
+                    setRoute(false);
+                  }}
+                >
+                  {c === "All places" && <Layers size={14} />} {c}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="workspace">
+            <aside className="results" aria-label="Campus places">
+              <div className="result-heading">
+                <strong>{filtered.length} places to explore</strong>
+                <span>DEMO COLLECTION</span>
+              </div>
+              <div className="place-list">
+                {filtered.length === 0 ? (
+                  <div className="empty">
+                    <Bookmark />
+                    <h3>
+                      {tab === "Saved places"
+                        ? "Your places, all together"
+                        : "No matching places"}
+                    </h3>
+                    <p>
+                      {tab === "Saved places"
+                        ? "Save a place from the map to find it here."
+                        : "Try another name or category."}
+                    </p>
+                    <button
+                      onClick={() => {
+                        setQuery("");
+                        setFilter("All places");
+                        setTab("Explore campus");
+                      }}
+                    >
+                      Explore all places
+                    </button>
+                  </div>
+                ) : (
+                  filtered.map((p) => (
+                    <article
+                      key={p.id}
+                      className={
+                        "place-card " + (current?.id === p.id ? "chosen" : "")
+                      }
+                    >
+                      <button
+                        className="place-select"
+                        onClick={() => select(p.id)}
+                        aria-pressed={current?.id === p.id}
+                      >
+                        <span
+                          className={
+                            "place-icon icon-" + p.category.split(" ")[0]
+                          }
+                        >
+                          {p.category === "Medical" ? (
+                            <Heart size={20} />
+                          ) : p.category === "Study spaces" ? (
+                            <Building2 size={20} />
+                          ) : p.category === "Washrooms" ? (
+                            <Accessibility size={20} />
+                          ) : (
+                            <ArrowUpRight size={20} />
+                          )}
+                        </span>
+                        <span className="place-copy">
+                          <small>{p.category}</small>
+                          <strong>{p.name}</strong>
+                          <span>
+                            <MapPin size={11} />
+                            {p.area}
+                          </span>
+                        </span>
+                        <ChevronRight size={15} />
+                      </button>
+                      <div className="place-bottom">
+                        <span className="sample-dot" /> Sample · needs
+                        verification
+                        <button
+                          aria-label={
+                            (saved.includes(p.id) ? "Unsave " : "Save ") +
+                            p.name
+                          }
+                          aria-pressed={saved.includes(p.id)}
+                          onClick={() => toggleSave(p.id)}
+                        >
+                          <Bookmark
+                            size={16}
+                            fill={
+                              saved.includes(p.id) ? "currentColor" : "none"
+                            }
+                          />
+                        </button>
+                      </div>
+                    </article>
+                  ))
+                )}
+              </div>
+              <div className="list-footer">
+                <Info size={15} />
+                <span>Better information. More confident choices.</span>
+              </div>
+            </aside>
+            <div className="map-panel">
+              <CampusMap
+                places={filtered}
+                selected={current?.id || 0}
+                onSelect={select}
+                route={route}
+              />
+              <div className="map-chip">
+                <span className="live-dot" /> NUST H-12{" "}
+                <span>Campus explorer</span>
+              </div>
+              <div className="map-disclaimer">
+                <Info size={13} /> Illustrative pins · accessibility not
+                verified
+              </div>
+              {current && (
+                <div className="detail-card">
+                  <div className="detail-top">
+                    <span className="detail-kicker">
+                      {route ? "ROUTE PREVIEW" : "TAKE A CLOSER LOOK"}
+                    </span>
+                    <button
+                      aria-label={
+                        (saved.includes(current.id) ? "Unsave " : "Save ") +
+                        current.name +
+                        " from details"
+                      }
+                      onClick={() => toggleSave(current.id)}
+                    >
+                      <Bookmark
+                        size={18}
+                        fill={
+                          saved.includes(current.id) ? "currentColor" : "none"
+                        }
+                      />
+                    </button>
+                  </div>
+                  <h3>{current.name}</h3>
+                  <p>
+                    {route
+                      ? "Illustrative route only. Path continuity, gradients and barriers have not been checked. Do not use this preview for navigation."
+                      : current.note}
+                  </p>
+                  <div className="feature-tags">
+                    {current.features.map((f) => (
+                      <span key={f}>{f}</span>
+                    ))}
+                  </div>
+                  <button
+                    className="route-button"
+                    onClick={() => setRoute((r) => !r)}
+                  >
+                    <Navigation size={16} />
+                    {route ? "Close route preview" : "Preview a sample route"}
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+          <p className="data-note">
+            <Info size={14} /> This is a concept demo. Pins, facility details,
+            and routes are illustrative—not verified access guidance.{" "}
+            <button onClick={() => setModal("about")}>
+              About our data <ArrowUpRight size={12} />
+            </button>
+          </p>
+        </section>
+        <section className="mission-strip">
+          <div className="mission-icon">
+            <Heart size={24} />
+          </div>
+          <div>
+            <h3>Access is a shared responsibility.</h3>
+            <p>
+              Our vision: a campus where everyone can move with greater
+              independence.
+            </p>
+          </div>
+          <button className="text-button" onClick={() => setModal("about")}>
+            Meet the mission <ArrowUpRight size={16} />
+          </button>
+        </section>
+      </main>
+      <footer>
+        <span className="footer-brand">
+          access<span>nust</span>
+        </span>
+        <p>
+          Built for belonging. An independent initiative, not an official NUST
+          service.
+        </p>
+        <button onClick={() => setModal("admin")}>
+          <ShieldCheck size={14} /> Admin demo
+        </button>
+      </footer>
+      {notice && (
+        <div className="toast" role="status">
+          <Check size={17} />
+          {notice}
+        </div>
+      )}
+      {modal && (
+        <Modal
+          title={
+            modal === "preferences"
+              ? "A campus experience for you"
+              : modal === "admin"
+                ? "Campus management"
+                : "More access. More independence."
+          }
+          close={() => setModal(null)}
+        >
+          {modal === "preferences" ? (
+            <>
+              <p>
+                Choose what matters to you. Preferences are saved on this
+                browser only; they do not certify routes or filter unverified
+                features.
+              </p>
+              <div className="preference-options">
+                {[
+                  "Avoid steps",
+                  "Prefer gentle slopes",
+                  "Find accessible washrooms",
+                  "Prefer quiet spaces",
+                ].map((p) => (
+                  <label key={p}>
+                    <span>{p}</span>
+                    <input
+                      type="checkbox"
+                      checked={prefs.includes(p)}
+                      onChange={() =>
+                        setPrefs((a) =>
+                          a.includes(p) ? a.filter((x) => x !== p) : [...a, p],
+                        )
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+              <p className="privacy-note">
+                No diagnosis needed. We do not track your location or send these
+                preferences to a server.
+              </p>
+              <button
+                className="primary full"
+                onClick={() => {
+                  setModal(null);
+                  setNotice("Your preferences are saved on this browser");
+                }}
+              >
+                Save preferences <Check size={17} />
+              </button>
+            </>
+          ) : modal === "about" ? (
+            <>
+              <p>
+                Access NUST is an independent initiative for students and
+                visitors at NUST H-12, Islamabad. Our goal is to make
+                accessibility information easier to find, understand, and
+                improve.
+              </p>
+              <h3>Honest information comes first</h3>
+              <p>
+                This prototype uses illustrative coordinates and facility
+                records. No accessibility claims have been verified. Map tiles
+                are provided by OpenStreetMap; they do not establish wheelchair
+                access.
+              </p>
+              <h3>From demonstration to dependable data</h3>
+              <p>
+                The next stage is a campus survey: document entrances, measure
+                ramps, check washroom facilities, and record who verified each
+                detail and when.
+              </p>
+              <a
+                className="source-link"
+                href="https://nust.edu.pk"
+                target="_blank"
+                rel="noreferrer"
+              >
+                NUST official website <ArrowUpRight size={14} />
+              </a>
+              <p className="privacy-note">
+                Official campus information could not be retrieved during
+                development. This link is a reference destination, not evidence
+                for the sample records.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="admin-banner">
+                <ShieldCheck size={18} /> Interface preview only · no
+                authentication
+              </div>
+              <p>
+                Try editing a sample location name. Changes last for this page
+                session. No student records are collected or shown.
+              </p>
+              <div className="admin-records">
+                {places.map((p) => (
+                  <label key={p.id}>
+                    <span>{p.category}</span>
+                    <input
+                      aria-label={
+                        "Edit " + initialPlaces.find((x) => x.id === p.id)?.name
+                      }
+                      value={p.name}
+                      maxLength={70}
+                      onChange={(e) =>
+                        setPlaces((a) =>
+                          a.map((x) =>
+                            x.id === p.id ? { ...x, name: e.target.value } : x,
+                          ),
+                        )
+                      }
+                    />
+                  </label>
+                ))}
+              </div>
+              <button
+                className="primary full"
+                onClick={() => {
+                  setModal(null);
+                  setNotice("Demo location changes applied for this session");
+                }}
+              >
+                Apply demo changes <Check size={16} />
+              </button>
+              <p className="privacy-note">
+                Production administration will require Supabase authentication
+                and server-enforced permissions.
+              </p>
+            </>
+          )}
+        </Modal>
+      )}
+    </>
+  );
 }
-function Modal({title,close,children}:{title:string;close:()=>void;children:React.ReactNode}){const closeRef=useRef(close);closeRef.current=close;useEffect(()=>{const previous=document.activeElement as HTMLElement;const before=document.body.style.overflow;document.body.style.overflow='hidden';const box=document.querySelector<HTMLElement>('[role="dialog"]');const focusable=()=>Array.from(box?.querySelectorAll<HTMLElement>('button,a,input,[tabindex="0"]')||[]);focusable()[0]?.focus();function key(e:KeyboardEvent){if(e.key==='Escape')closeRef.current();if(e.key==='Tab'){const els=focusable(),first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}}}document.addEventListener('keydown',key);return()=>{document.removeEventListener('keydown',key);document.body.style.overflow=before;previous?.focus()}},[]);return <div className="modal-backdrop" onClick={e=>{if(e.target===e.currentTarget)close()}}><section role="dialog" aria-modal="true" aria-labelledby="modal-title" className="modal"><button className="modal-close" aria-label="Close dialog" onClick={close}><X size={22}/></button><span className="eyebrow">ACCESS NUST</span><h2 id="modal-title">{title}</h2>{children}</section></div>}
+function Modal({
+  title,
+  close,
+  children,
+}: {
+  title: string;
+  close: () => void;
+  children: React.ReactNode;
+}) {
+  const closeRef = useRef(close);
+  closeRef.current = close;
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement;
+    const before = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const box = document.querySelector<HTMLElement>('[role="dialog"]');
+    const focusable = () =>
+      Array.from(
+        box?.querySelectorAll<HTMLElement>('button,a,input,[tabindex="0"]') ||
+          [],
+      );
+    focusable()[0]?.focus();
+    function key(e: KeyboardEvent) {
+      if (e.key === "Escape") closeRef.current();
+      if (e.key === "Tab") {
+        const els = focusable(),
+          first = els[0],
+          last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    }
+    document.addEventListener("keydown", key);
+    return () => {
+      document.removeEventListener("keydown", key);
+      document.body.style.overflow = before;
+      previous?.focus();
+    };
+  }, []);
+  return (
+    <div
+      className="modal-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) close();
+      }}
+    >
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        className="modal"
+      >
+        <button
+          className="modal-close"
+          aria-label="Close dialog"
+          onClick={close}
+        >
+          <X size={22} />
+        </button>
+        <span className="eyebrow">ACCESS NUST</span>
+        <h2 id="modal-title">{title}</h2>
+        {children}
+      </section>
+    </div>
+  );
+}
