@@ -1,74 +1,141 @@
-export type Category = "Entrances" | "Washrooms" | "Medical" | "Study spaces";
+import research from "@/data/campus-directory.json";
+export const categories = [
+  "Entrances",
+  "Washrooms",
+  "Medical",
+  "Study spaces",
+  "Academic",
+  "Food",
+  "Hostels",
+  "Support",
+  "Other",
+] as const;
+export type Category = (typeof categories)[number];
+export const accessKeys = [
+  "stepFreeEntrance",
+  "ramp",
+  "lift",
+  "accessibleWashroom",
+  "accessibleParking",
+] as const;
+export type AccessStatus = "unknown" | "yes" | "no";
 export type Place = {
-  id: number;
+  id: string;
   name: string;
   category: Category;
   area: string;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
   features: string[];
   note: string;
+  guideMarkers: number[];
+  aliases: string[];
+  accessibility: Record<(typeof accessKeys)[number], AccessStatus>;
+  evidence: {
+    claim: string;
+    url?: string | null;
+    evidenceAccess: string;
+    publicationDate?: string | null;
+    accessedDate?: string | null;
+    sourceId?: string;
+  }[];
+  limitations: string[];
+  published: boolean;
+  location_verified: boolean;
+  location_source: string | null;
+  checked_at: string | null;
 };
-// Illustrative coordinates and attributes. Not field-verified navigation data.
-export const initialPlaces: Place[] = [
-  {
-    id: 1,
-    name: "Central Library",
-    category: "Study spaces",
-    area: "Academic core",
-    lat: 33.6427,
-    lng: 72.9909,
-    features: ["Entrance review needed", "Quiet-space review needed"],
-    note: "Explore how accessible study spaces could be documented. Entrance and facility details require a campus survey.",
-  },
-  {
-    id: 2,
-    name: "Student Centre",
-    category: "Entrances",
-    area: "Student life",
-    lat: 33.646,
-    lng: 72.9919,
-    features: ["Ramp review needed", "Door-width review needed"],
-    note: "A sample entrance record. Ramp location, gradient and opening hours have not been verified.",
-  },
-  {
-    id: 3,
-    name: "Campus Medical Centre",
-    category: "Medical",
-    area: "Campus services",
-    lat: 33.6449,
-    lng: 72.9864,
-    features: ["Access review needed", "Hours unconfirmed"],
-    note: "A sample medical-facility record, not an emergency service directory. Confirm the real location and services with campus staff.",
-  },
-  {
-    id: 4,
-    name: "Academic Block · washroom",
-    category: "Washrooms",
-    area: "Academic core",
-    lat: 33.6415,
-    lng: 72.9884,
-    features: ["Transfer-space review needed", "Access review needed"],
-    note: "Illustrates a washroom listing. The existence and accessibility of this facility are not confirmed.",
-  },
-  {
-    id: 5,
-    name: "Academic Block · entrance",
-    category: "Entrances",
-    area: "Academic core",
-    lat: 33.6404,
-    lng: 72.993,
-    features: ["Step-free review needed", "Surface review needed"],
-    note: "A sample entrance pin for demonstrating filters. Do not use this location as an accessibility guarantee.",
-  },
-  {
-    id: 6,
-    name: "Student Commons",
-    category: "Study spaces",
-    area: "Student life",
-    lat: 33.6478,
-    lng: 72.9889,
-    features: ["Seating review needed", "Access review needed"],
-    note: "A sample shared-space record. Location and accessibility attributes await verification.",
-  },
-];
+const categoryMap: Record<string, Category> = {
+  entrance: "Entrances",
+  medical: "Medical",
+  library: "Study spaces",
+  academic: "Academic",
+  food: "Food",
+  hostel: "Hostels",
+  committee: "Support",
+  counselling: "Support",
+};
+export const featureLabels: Record<(typeof accessKeys)[number], string> = {
+  stepFreeEntrance: "Step-free entrance",
+  ramp: "Ramp",
+  lift: "Lift",
+  accessibleWashroom: "Accessible washroom",
+  accessibleParking: "Accessible parking",
+};
+export function featureTags(a: Place["accessibility"]) {
+  const known = accessKeys.filter((k) => a[k] !== "unknown");
+  return known.length
+    ? known.map(
+        (k) =>
+          `${featureLabels[k]}: ${a[k] === "yes" ? "reported available" : "reported unavailable"}`,
+      )
+    : ["Accessibility not yet checked"];
+}
+export const initialPlaces: Place[] = research.records
+  .filter((r) => r.kind === "place" || r.kind === "service")
+  .filter((r) => r.id !== "nust-sports-complex")
+  .map((r) => ({
+    id: r.id,
+    name: r.name,
+    category: categoryMap[r.category] || "Other",
+    area: "NUST H-12",
+    lat: null,
+    lng: null,
+    features: ["Accessibility not yet checked"],
+    note: r.guideMarkers.length
+      ? `Listed as marker ${r.guideMarkers.join(", ")} in the supplied campus guide. Current facility details and access need confirmation.`
+      : "Reported in supplied research. Original sources and current details need confirmation.",
+    guideMarkers: r.guideMarkers,
+    aliases: r.aliases,
+    accessibility: r.accessibility as Place["accessibility"],
+    evidence: r.evidence,
+    limitations: r.limitations,
+    published: true,
+    location_verified: false,
+    location_source: null,
+    checked_at: null,
+  }))
+  .sort((a, b) => {
+    const priority = [
+      "nust-medical-centre",
+      "nust-central-library",
+      "nust-sada",
+      "nust-gate-1",
+      "nust-gate-2",
+      "nust-cafeteria-c1",
+      "nust-cafeteria-c2",
+    ];
+    const rank = (id: string) =>
+      priority.includes(id) ? priority.indexOf(id) : 99;
+    return rank(a.id) - rank(b.id) || a.name.localeCompare(b.name);
+  });
+export function fromRow(r: Record<string, unknown>): Place {
+  return {
+    id: r.id as string,
+    name: r.name as string,
+    category: r.category as Category,
+    area: "NUST H-12",
+    lat: r.latitude as number | null,
+    lng: r.longitude as number | null,
+    features: featureTags(r.accessibility as Place["accessibility"]),
+    note: r.description as string,
+    guideMarkers: r.guide_markers as number[],
+    aliases: r.aliases as string[],
+    accessibility: r.accessibility as Place["accessibility"],
+    evidence: r.evidence as Place["evidence"],
+    limitations: r.limitations as string[],
+    published: r.published as boolean,
+    location_verified: r.location_verified as boolean,
+    location_source: r.location_source as string | null,
+    checked_at: r.checked_at as string | null,
+  };
+}
+export function safeSource(url?: string | null) {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    return u.protocol === "https:" ? u.href : null;
+  } catch {
+    return null;
+  }
+}

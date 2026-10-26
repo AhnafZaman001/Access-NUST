@@ -23,65 +23,96 @@ import {
   ChevronRight,
   Menu,
 } from "lucide-react";
-import { initialPlaces, type Category } from "@/lib/places";
+import {
+  initialPlaces,
+  categories,
+  safeSource,
+  type Place,
+} from "@/lib/places";
+import Link from "next/link";
+import { useAccount, preferenceOptions } from "@/components/AccountProvider";
 const CampusMap = dynamic(() => import("@/components/CampusMap"), {
   ssr: false,
   loading: () => <div className="map-loading">Preparing your campus map…</div>,
 });
-const categories: Category[] = [
-  "Entrances",
-  "Washrooms",
-  "Medical",
-  "Study spaces",
-];
 export default function Home() {
   const [tab, setTab] = useState("Explore campus");
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All places");
-  const [selected, setSelected] = useState(1);
-  const [saved, setSaved] = useState<number[]>([]);
+  const [selected, setSelected] = useState("nust-medical-centre");
+  const account = useAccount();
+  const saved = account.saved;
+  const [loadError, setLoadError] = useState("");
+  const [source, setSource] = useState("research");
+  const [saving, setSaving] = useState(false);
   const [prefs, setPrefs] = useState<string[]>([]);
-  const [modal, setModal] = useState<"preferences" | "about" | "admin" | null>(
-    null,
-  );
-  const [route, setRoute] = useState(false);
-  const [places, setPlaces] = useState(initialPlaces);
+  const [modal, setModal] = useState<"preferences" | "about" | null>(null);
+  const [places, setPlaces] = useState<Place[]>(initialPlaces);
   const [notice, setNotice] = useState("");
-  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    try {
-      const s = JSON.parse(localStorage.getItem("access-nust-saved") || "[]");
-      const p = JSON.parse(localStorage.getItem("access-nust-prefs") || "[]");
-      if (Array.isArray(s)) setSaved(s.filter((x) => typeof x === "number"));
-      if (Array.isArray(p)) setPrefs(p.filter((x) => typeof x === "string"));
-    } catch {}
-    setLoaded(true);
+    setPrefs(account.preferences);
+  }, [account.preferences]);
+  useEffect(() => {
+    let active = true;
+    fetch("/api/places")
+      .then(async (r) => {
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error);
+        if (active) {
+          setPlaces(d.places);
+          setSource(d.source);
+        }
+      })
+      .catch(() => {
+        if (active)
+          setLoadError(
+            "Live directory could not load. Showing the bundled research directory; recent changes may be missing.",
+          );
+      });
+    return () => {
+      active = false;
+    };
   }, []);
-  useEffect(() => {
-    if (loaded)
-      try {
-        localStorage.setItem("access-nust-saved", JSON.stringify(saved));
-        localStorage.setItem("access-nust-prefs", JSON.stringify(prefs));
-      } catch {}
-  }, [saved, prefs, loaded]);
   useEffect(() => {
     if (!notice) return;
     const timer = setTimeout(() => setNotice(""), 3500);
     return () => clearTimeout(timer);
   }, [notice]);
-  const select = useCallback((id: number) => {
+  const select = useCallback((id: string) => {
     setSelected(id);
-    setRoute(false);
   }, []);
   const filtered = places.filter(
     (p) =>
       (filter === "All places" || p.category === filter) &&
       (tab !== "Saved places" || saved.includes(p.id)) &&
-      (p.name + " " + p.area).toLowerCase().includes(query.toLowerCase()),
+      (p.name + " " + p.area + " " + p.aliases.join(" "))
+        .toLowerCase()
+        .includes(query.toLowerCase()),
   );
   const current = filtered.find((p) => p.id === selected) || filtered[0];
-  const toggleSave = (id: number) =>
-    setSaved((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  const toggleSave = async (id: string) => {
+    try {
+      await account.toggleSaved(id);
+    } catch (e) {
+      setNotice(e instanceof Error ? e.message : "Could not save place");
+    }
+  };
+  async function savePreferences() {
+    setSaving(true);
+    try {
+      await account.setPreferences(prefs);
+      setModal(null);
+      setNotice(
+        account.user
+          ? "Preferences saved to your account"
+          : "Preferences saved on this browser",
+      );
+    } catch (e) {
+      setNotice(e instanceof Error ? e.message : "Could not save preferences");
+    } finally {
+      setSaving(false);
+    }
+  }
   return (
     <>
       <a className="skip" href="#explore">
@@ -115,6 +146,9 @@ export default function Home() {
             Our mission <ArrowUpRight size={13} />
           </button>
         </nav>
+        <Link href="/account" className="account-link">
+          {account.user ? "Your account" : "Sign in"}
+        </Link>
         <button
           className="profile-button"
           onClick={() => setModal("preferences")}
@@ -125,6 +159,11 @@ export default function Home() {
         </button>
       </header>
       <main>
+        {(loadError || account.error) && (
+          <p className="error-banner" role="alert">
+            {loadError || account.error}
+          </p>
+        )}
         <section className="hero">
           <div>
             <div className="eyebrow">
@@ -217,7 +256,6 @@ export default function Home() {
                   className={filter === c ? "filter active" : "filter"}
                   onClick={() => {
                     setFilter(c);
-                    setRoute(false);
                   }}
                 >
                   {c === "All places" && <Layers size={14} />} {c}
@@ -229,7 +267,11 @@ export default function Home() {
             <aside className="results" aria-label="Campus places">
               <div className="result-heading">
                 <strong>{filtered.length} places to explore</strong>
-                <span>DEMO COLLECTION</span>
+                <span>
+                  {source === "supabase"
+                    ? "CAMPUS DIRECTORY"
+                    : "RESEARCH DIRECTORY"}
+                </span>
               </div>
               <div className="place-list">
                 {filtered.length === 0 ? (
@@ -294,8 +336,10 @@ export default function Home() {
                         <ChevronRight size={15} />
                       </button>
                       <div className="place-bottom">
-                        <span className="sample-dot" /> Sample · needs
-                        verification
+                        <span className="sample-dot" />{" "}
+                        {p.location_verified
+                          ? "Location reviewed"
+                          : "Location not yet mapped"}
                         <button
                           aria-label={
                             (saved.includes(p.id) ? "Unsave " : "Save ") +
@@ -324,23 +368,23 @@ export default function Home() {
             <div className="map-panel">
               <CampusMap
                 places={filtered}
-                selected={current?.id || 0}
+                selected={current?.id || ""}
                 onSelect={select}
-                route={route}
               />
               <div className="map-chip">
                 <span className="live-dot" /> NUST H-12{" "}
                 <span>Campus explorer</span>
               </div>
               <div className="map-disclaimer">
-                <Info size={13} /> Illustrative pins · accessibility not
-                verified
+                <Info size={13} /> Only reviewed coordinates appear on the map
               </div>
               {current && (
                 <div className="detail-card">
                   <div className="detail-top">
                     <span className="detail-kicker">
-                      {route ? "ROUTE PREVIEW" : "TAKE A CLOSER LOOK"}
+                      {current.guideMarkers.length
+                        ? `CAMPUS GUIDE · #${current.guideMarkers.join(", #")}`
+                        : "RESEARCH RECORD"}
                     </span>
                     <button
                       aria-label={
@@ -359,31 +403,58 @@ export default function Home() {
                     </button>
                   </div>
                   <h3>{current.name}</h3>
-                  <p>
-                    {route
-                      ? "Illustrative route only. Path continuity, gradients and barriers have not been checked. Do not use this preview for navigation."
-                      : current.note}
+                  <p>{current.note}</p>
+                  <p className="location-status">
+                    {current.lat !== null && current.location_verified
+                      ? "Location reviewed. Accessibility is reported separately."
+                      : "Exact location awaiting confirmation. This place is searchable but has no map pin."}
                   </p>
                   <div className="feature-tags">
                     {current.features.map((f) => (
                       <span key={f}>{f}</span>
                     ))}
                   </div>
-                  <button
-                    className="route-button"
-                    onClick={() => setRoute((r) => !r)}
-                  >
-                    <Navigation size={16} />
-                    {route ? "Close route preview" : "Preview a sample route"}
-                    <ArrowRight size={16} />
-                  </button>
+                  <details className="evidence-details">
+                    <summary>
+                      Sources & limitations ({current.evidence.length})
+                    </summary>
+                    <ul>
+                      {current.evidence.map((e, i) => (
+                        <li key={i}>
+                          {safeSource(e.url) ? (
+                            <a
+                              href={safeSource(e.url)!}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {e.claim} ↗
+                            </a>
+                          ) : (
+                            <span>{e.claim}</span>
+                          )}
+                          <small>
+                            {e.evidenceAccess.replaceAll("_", " ")}
+                            {e.accessedDate
+                              ? ` · Accessed ${e.accessedDate}`
+                              : ""}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                    <p>{current.limitations.join(" ")}</p>
+                  </details>
+                  <div className="route-unavailable">
+                    <Navigation size={14} /> Route guidance awaits a campus
+                    access survey.
+                  </div>
                 </div>
               )}
             </div>
           </div>
           <p className="data-note">
-            <Info size={14} /> This is a concept demo. Pins, facility details,
-            and routes are illustrative—not verified access guidance.{" "}
+            <Info size={14} /> Research-based directory. A listed place is not a
+            promise of accessibility. Check the evidence and current campus
+            conditions.{" "}
             <button onClick={() => setModal("about")}>
               About our data <ArrowUpRight size={12} />
             </button>
@@ -413,9 +484,9 @@ export default function Home() {
           Built for belonging. An independent initiative, not an official NUST
           service.
         </p>
-        <button onClick={() => setModal("admin")}>
-          <ShieldCheck size={14} /> Admin demo
-        </button>
+        <Link href="/admin" className="admin-link">
+          <ShieldCheck size={14} /> Campus administration
+        </Link>
       </footer>
       {notice && (
         <div className="toast" role="status">
@@ -428,26 +499,21 @@ export default function Home() {
           title={
             modal === "preferences"
               ? "A campus experience for you"
-              : modal === "admin"
-                ? "Campus management"
-                : "More access. More independence."
+              : "More access. More independence."
           }
           close={() => setModal(null)}
         >
           {modal === "preferences" ? (
             <>
               <p>
-                Choose what matters to you. Preferences are saved on this
-                browser only; they do not certify routes or filter unverified
-                features.
+                Choose what matters to you.{" "}
+                {account.user
+                  ? "Preferences are stored privately in your account."
+                  : "Guest preferences stay on this browser."}{" "}
+                They do not certify routes or filter unverified features.
               </p>
               <div className="preference-options">
-                {[
-                  "Avoid steps",
-                  "Prefer gentle slopes",
-                  "Find accessible washrooms",
-                  "Prefer quiet spaces",
-                ].map((p) => (
+                {preferenceOptions.map((p) => (
                   <label key={p}>
                     <span>{p}</span>
                     <input
@@ -463,20 +529,20 @@ export default function Home() {
                 ))}
               </div>
               <p className="privacy-note">
-                No diagnosis needed. We do not track your location or send these
-                preferences to a server.
+                No diagnosis needed. We do not track your location.{" "}
+                {account.user
+                  ? "You and the site administrator can manage your preferences."
+                  : "Sign in to save preferences across devices."}
               </p>
               <button
                 className="primary full"
-                onClick={() => {
-                  setModal(null);
-                  setNotice("Your preferences are saved on this browser");
-                }}
+                onClick={savePreferences}
+                disabled={saving || !account.ready}
               >
-                Save preferences <Check size={17} />
+                {saving ? "Saving…" : "Save preferences"} <Check size={17} />
               </button>
             </>
-          ) : modal === "about" ? (
+          ) : (
             <>
               <p>
                 Access NUST is an independent initiative for students and
@@ -486,10 +552,10 @@ export default function Home() {
               </p>
               <h3>Honest information comes first</h3>
               <p>
-                This prototype uses illustrative coordinates and facility
-                records. No accessibility claims have been verified. Map tiles
-                are provided by OpenStreetMap; they do not establish wheelchair
-                access.
+                This directory combines a supplied campus guide with provisional
+                online research. Sources and their limitations are shown on each
+                record. Unconfirmed coordinates are withheld. Map tiles come
+                from OpenStreetMap and do not establish wheelchair access.
               </p>
               <h3>From demonstration to dependable data</h3>
               <p>
@@ -506,54 +572,9 @@ export default function Home() {
                 NUST official website <ArrowUpRight size={14} />
               </a>
               <p className="privacy-note">
-                Official campus information could not be retrieved during
-                development. This link is a reference destination, not evidence
-                for the sample records.
-              </p>
-            </>
-          ) : (
-            <>
-              <div className="admin-banner">
-                <ShieldCheck size={18} /> Interface preview only · no
-                authentication
-              </div>
-              <p>
-                Try editing a sample location name. Changes last for this page
-                session. No student records are collected or shown.
-              </p>
-              <div className="admin-records">
-                {places.map((p) => (
-                  <label key={p.id}>
-                    <span>{p.category}</span>
-                    <input
-                      aria-label={
-                        "Edit " + initialPlaces.find((x) => x.id === p.id)?.name
-                      }
-                      value={p.name}
-                      maxLength={70}
-                      onChange={(e) =>
-                        setPlaces((a) =>
-                          a.map((x) =>
-                            x.id === p.id ? { ...x, name: e.target.value } : x,
-                          ),
-                        )
-                      }
-                    />
-                  </label>
-                ))}
-              </div>
-              <button
-                className="primary full"
-                onClick={() => {
-                  setModal(null);
-                  setNotice("Demo location changes applied for this session");
-                }}
-              >
-                Apply demo changes <Check size={16} />
-              </button>
-              <p className="privacy-note">
-                Production administration will require Supabase authentication
-                and server-enforced permissions.
+                Some online findings were available only as search excerpts. The
+                guide has 2022 file metadata, not a confirmed publication date.
+                A facility missing from the guide may still exist today.
               </p>
             </>
           )}

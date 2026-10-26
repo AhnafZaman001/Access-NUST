@@ -1,10 +1,10 @@
 # Access NUST
 
-An independent accessibility-map concept for NUST H-12, Islamabad. Built with Next.js, React, TypeScript and Leaflet. Designed for Vercel.
+Independent campus-accessibility directory for NUST H-12, Islamabad. Next.js/React frontend, Supabase Auth/Postgres backend, and Vercel deployment support.
 
 ## Run
 
-Use Node.js 22 or newer.
+Node.js 22 or newer:
 
 ```sh
 npm ci
@@ -13,54 +13,63 @@ npm run dev
 
 Production: `npm run build` then `npm run start`.
 
-## Demo features
+Without Supabase configuration, the public app serves 65 researched records and saves guest preferences/bookmarks only in the browser. Account and admin pages clearly explain that the backend is disconnected. A configured but unreachable backend produces an error; the directory labels its bundled research fallback.
 
-- Campus map with category filters, search and matching place list.
-- Place details and clearly labeled illustrative route previews.
-- Saved places and preferences stored only in the current browser.
-- Admin interface preview that edits sample place names for the current page session.
-- Responsive layout, keyboard controls, modal focus containment and reduced-motion support.
+## Frontend
 
-## Data boundaries
+- Search and category filters across researched campus records.
+- Campus-guide marker numbers, evidence links, source-access limitations and accessibility status on place cards.
+- Map pins only for reviewed coordinates. All initial coordinates are null; there are no fabricated facility or route pins.
+- Optional accounts, persistent private preferences/bookmarks when connected, separate browser-only guest state.
+- Admin place creation, editing, publishing, deletion, coordinate review, accessibility observations and supporting evidence; profile management.
+- Responsive layout, map/list parity, keyboard focus containment and reduced-motion support.
 
-All six records in `lib/places.ts` are illustrative. Coordinates, accessibility features and route segments are not verified. Do not use this prototype as navigation or emergency guidance. OpenStreetMap tiles provide geographic context, not wheelchair-accessibility certification. The official NUST site could not be retrieved in the build environment (proxy HTTP 403); no official accessibility facts were established.
+## Backend setup
 
-The admin demo has no authentication and must never contain real student data. There is no Supabase integration yet. No continuous location tracking, diagnosis collection, payments or messaging is implemented.
+Follow [supabase/README.md](supabase/README.md). Run the migration, then the seed. Configure:
 
-## Validate
+```text
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+```
+
+An example is provided in `.env.example`. Do not place private credentials in `NEXT_PUBLIC_*` variables. The database enforces user/admin permissions with row-level security. There is no signup flow that grants admin access.
+
+Public endpoints:
+
+- `GET /api/places`: published Supabase directory, or bundled research if the backend is unconfigured.
+- `GET /api/health`: process/configuration status, not a live database health check.
+
+Authenticated writes use the Supabase client and database policies directly. No service-role bypass is used.
+
+## Research
+
+`data/campus-directory.json` preserves the 73-record research consolidation, 46 guide markers, evidence and isolated uncertain coordinates. `lib/places.ts` selects 65 place/service records for the public directory. Unresolved entities, policy/aggregate/road records, and the disputed remote Sports Complex object are not public destinations. The campus guide is historical; omission is not evidence of nonexistence. None of the imported data establishes wheelchair accessibility. No route guidance is offered without a route survey.
+
+Original PDF imagery is not redistributed. Sources are linked in each record; research excerpts and provenance are retained for review.
+
+## Verify
 
 ```sh
 npm run build
 npm run typecheck
+npm run test:db
+# Start production server in a separate terminal, then:
 npx playwright install chromium
-# With the production server running in another terminal:
-npx playwright test
+npm run test:e2e
 ```
 
-For environments that block Playwright's download host, an npm-distributed Chromium is included as a development dependency:
+When browser downloads are blocked, the included development-only Chromium package can supply a binary:
 
 ```sh
 node --input-type=module -e "import chromium from '@sparticuz/chromium'; console.log(await chromium.executablePath())"
-CHROMIUM_EXECUTABLE_PATH=/tmp/chromium npx playwright test
+CHROMIUM_EXECUTABLE_PATH=/tmp/chromium npm run test:e2e
 ```
 
-Use the path actually printed by the first command. The two browser tests exercise filters, search, saving, preference persistence, route preview, admin editing, mobile width and empty states.
+Use the actual path printed. Database tests run the real schema/policies locally with a simulated auth identity; hosted Auth and email delivery require separate verification in your Supabase project.
 
-## Deploy to Vercel
+## Deploy
 
-Import `AhnafZaman001/Access-NUST` into Vercel, select the Next.js framework and repository root, then deploy. No environment variables or database credentials are needed for this demo. Build command: `npm run build`; output uses the Next.js default. Test map tiles from the deployed browser; outbound requests to `tile.openstreetmap.org` must be permitted.
+Import `AhnafZaman001/Access-NUST` into Vercel as a Next.js project. Build command: `npm run build`. Add the public Supabase configuration and rebuild when the database is ready. Configure the matching Auth Site URL in Supabase. Map tiles require browser access to `tile.openstreetmap.org` and retain OpenStreetMap attribution.
 
-Alternatively, with authorized Vercel CLI authentication, run `npx vercel` for a preview deployment. Do not put tokens in source, remote URLs or chat.
-
-## Pitch walkthrough
-
-1. Explain the mission: campus accessibility information in one place.
-2. Filter by a destination category and open its details.
-3. Show what is known versus what still requires verification.
-4. Preview an illustrative route and explain the planned campus survey.
-5. Save a place and select functional preferences without providing medical history.
-6. Show the admin interface and describe the future verification workflow.
-
-## Next milestone
-
-Survey actual campus facilities; retain source and verification dates. Then add Supabase Auth, database tables, owner-only preference policies and admin-only campus-data policies before collecting any personal information. Validate continuous wheelchair routes, surfaces, gradients and barriers before offering navigation.
+Before accepting real users, verify email confirmation, two-user privacy, owner-only admin access, saving across devices, and published changes on the deployed site. Establish a contact and account-deletion process. No continuous location tracking, medical-history collection or verified route engine is implemented.

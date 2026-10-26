@@ -1,0 +1,3858 @@
+{
+  "schemaVersion": "1.0",
+  "title": "Access NUST consolidated research directory",
+  "compiledDate": "2026-10-26",
+  "scope": "Supplied research only; no new web research or application changes.",
+  "status": "provisional_research_not_navigation_data",
+  "rules": [
+    "All canonical coordinates are null; candidate coordinates are isolated in uncertainCoordinates.",
+    "publicMapEligible is false for every record and coordinate pending review.",
+    "Gate 16 and reception polygon are explicitly excluded, not renamed as verified facilities.",
+    "Guide omission does not establish nonexistence.",
+    "Hostel groups are individual entries linked to the aggregate, not aliases of one hostel.",
+    "Potentially related buildings/services are not merged without identity evidence.",
+    "Guide creation date is file metadata, not publication date.",
+    "Evidence access and dates are preserved as supplied, not certified as independently verified."
+  ],
+  "inputFiles": {
+    "needs-location.json": {
+      "sha256": "36c69f5870e81d03efe6af878cdd7c7c8c5d87b7a54f5ee48037f6a6906de725",
+      "bytes": 24125
+    },
+    "support-resources.json": {
+      "sha256": "bc3aa60e87dbc7a983cf09285b0103b8baffdcadd59e090f536f1c2109b7f2f4",
+      "bytes": 5375
+    },
+    "map-ready.geojson": {
+      "sha256": "5c76b564464475545168df9611c4c3dd53eaae8d4bde8ba5ce703a0c143f3922",
+      "bytes": 11916
+    },
+    "research-notes.md": {
+      "sha256": "51277f6851b731a3b9285035bbaf95f9e518c497615a103cb59c9dd13d7464c6",
+      "bytes": 6699
+    },
+    "Guide_MAP1.pdf": {
+      "sha256": "73504e2d27416386ef4a28883d0d2d511564427c24024681ce881377736eb01f",
+      "bytes": 413532
+    },
+    "files(2).zip": {
+      "sha256": "c26629f01e13ba43183437b157732d8a91c2bd826b52a9cde95452654ffcf553",
+      "bytes": 7559
+    }
+  },
+  "sources": {
+    "user-campus-guide": {
+      "title": "NUST Main Campus Guide Map (user-supplied file Guide_MAP1.pdf)",
+      "evidenceAccess": "other",
+      "evidenceAccessNote": "File supplied by the user and read directly (raster image; no text layer). Legend re-read from the extracted 2480x1754 image.",
+      "file": {
+        "sizeBytes": 413532,
+        "pages": 1,
+        "pageSize": "A3 (1190.4 x 841.92 pt)",
+        "content": "single JPEG raster, 2480x1754 px at 150 ppi",
+        "textLayer": false,
+        "pdfTitleField": "Print",
+        "creator": "Adobe Illustrator CS6 (Windows)",
+        "producer": "Adobe Photoshop for Windows - Image Conversion Plug-in",
+        "pdfCreationDate": "2022-08-25T07:19:11Z",
+        "pdfModDate": "2022-08-25T07:22:17Z"
+      },
+      "publicationDate": null,
+      "publicationDateNote": "No publication date is printed on the guide. The PDF creation date is file metadata, not a publication date.",
+      "orientationAndScale": "Stylised 3D illustration: no north arrow, no scale bar, perspective distortion. Not suitable for deriving coordinates, distances or routes.",
+      "accessibilityContent": "The guide contains no accessibility symbols, ramps, lifts, step-free routes or notes.",
+      "possibleOriginalUrls": [
+        {
+          "url": "https://nust.edu.pk/downloads/nust-guide-map/",
+          "type": "official downloads page titled 'NUST Guide Map', size listed as 404 KB",
+          "evidenceAccess": "search_snippet",
+          "note": "Page could not be opened (bot detection). The user's file is 413,532 bytes (about 404 KiB), consistent with the listed size but not proof of identity."
+        },
+        {
+          "url": "https://nust.edu.pk/wp-content/uploads/2022/08/Guide_MAP.pdf",
+          "type": "official file link cited in an SMME joining-instructions PDF as the campus location map",
+          "evidenceAccess": "search_snippet",
+          "note": "Filename differs (Guide_MAP vs Guide_MAP1); not opened. The '2022/08' path matches the PDF creation month but is only a path hint."
+        },
+        {
+          "url": "https://www.scribd.com/document/841910729/8-NUST-Main-Campus-Guide-Map",
+          "type": "third-party copy titled 'NUST Main Campus Guide Map'",
+          "evidenceAccess": "search_snippet",
+          "note": "Undated in the excerpt; not an authoritative source."
+        }
+      ],
+      "originalUrlConfirmed": false
+    }
+  },
+  "records": [
+    {
+      "id": "nust-central-library",
+      "name": "NUST Central Library",
+      "aliases": [
+        "Central Library"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "library",
+      "guideMarkers": [
+        24
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Official library site says the library is in the H-12 sector and spans three floors",
+          "url": "https://library.nust.edu.pk/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "located in Islamabad H-12 Sector",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Mapcarta lists a 'NUST Central Library' (library) near the Convocation Ground; no OSM ID or coordinates surfaced",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 24 is labeled Central Library.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Central Library",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 24,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Three floors says nothing about a lift",
+        "OSM ID and coordinates not found",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate entrances; lift; washrooms; accessible parking"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Numbered building drawn beside #23 Main Office, near the middle of the illustration",
+          "relativePlacement": "#23 Main Office directly adjacent; #9 SEECS to one side",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-central-library-cafe",
+      "name": "Central Library Cafe",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists 'Central Library Cafe' as a cafe about 130 m SW of the Convocation Ground",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Relative distance only; no ID or coordinates",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-central-library-parking",
+      "name": "Central Library Parking",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "parking",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists 'Central Library Parking' as a parking area about 130 m south of the Convocation Ground",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Relative distance only; no ID or coordinates; accessible bays unknown",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Count and measure any accessible bays"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-auditorium",
+      "name": "NUST Auditorium",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists 'NUST Auditorium' as a university building about 100 m NE of the Convocation Ground",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Relative distance only",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-main-office",
+      "name": "NUST Main Office",
+      "aliases": [
+        "Main Office"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        23
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists 'NUST Main Office' as a university building near the Convocation Ground",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 23 is labeled Main Office.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Main Office",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 23,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "No ID, coordinates or distance",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-gate-4",
+      "name": "Gate 4",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "entrance",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Yandex Maps has a listing 'Nust Gate 4' on Sir Syed Avenue, Islamabad",
+          "url": "https://yandex.com/maps/org/nust_gate_4/231568152176/",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "Nust Gate 4, university, Islamabad, Sir Syed Avenue",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Official admissions page names Gate-4 as the location of the NUST Exam Hall",
+          "url": "https://nust.edu.pk/admissions/undergraduates/guide-map-for-test-venue/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Yandex address (Sir Syed Avenue) differs from the official 'opposite Kashmir Highway' wording; no coordinates in excerpts",
+        "Yandex is a commercial listing; licence not checked",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "GPS the gate; pedestrian vs vehicle entry; kerbs"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-exam-hall",
+      "name": "NUST Exam Hall",
+      "aliases": [
+        "Exam Hall"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Official admissions page describes the Exam Hall as located at Sector H-12, reached via Gate-4",
+          "url": "https://nust.edu.pk/admissions/undergraduates/guide-map-for-test-venue/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "NUST Exam Hall (Gate-4) is located at Sector H-12, Islamabad",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Exam Hall\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Exam Hall",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": "Drawn on the left side of the illustration near markers 8 and 13",
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Separate place from the gate; hall building location unknown",
+        "Page not opened in full",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate hall; entrances; seating access; washrooms"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-gate-2",
+      "name": "Gate 2",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "entrance",
+      "guideMarkers": [
+        17
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "An anonymous review says visitors obtain an entry permit at Gate 2",
+          "url": "https://pk.asiafirms.com/islamabad/nust-exam-hall-866081.html",
+          "sourceType": "community",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 17 is labeled Gate 2.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Gate 2",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 17,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Single undated review; community report",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Confirm gate, GPS, visitor process"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Perimeter marker at the top-left corner of the illustration, on the edge labelled Srinagar Highway",
+          "relativePlacement": "Campus perimeter; the 'Exam Hall' label is on the left side of the illustration",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-gate-1",
+      "name": "Gate 1",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "entrance",
+      "guideMarkers": [
+        16
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "An anonymous review mentions entering through Gate 1",
+          "url": "https://pk.asiafirms.com/islamabad/nust-exam-hall-866081.html",
+          "sourceType": "community",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 16 is labeled Gate 1.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Gate 1",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 16,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Single undated review; community report",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Confirm gate, GPS, access"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Perimeter marker on the right-hand side of the illustration, not on the edge labelled Srinagar Highway",
+          "relativePlacement": "Campus perimeter road",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-medical-centre",
+      "name": "NUST Medical Centre",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "medical",
+      "guideMarkers": [
+        44
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Official page says the Medical Centre provides health services including outpatient care for students and staff",
+          "url": "https://nust.edu.pk/about-us/resources-offices/nust-medical-centre/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "NUST Medical Centre provides health services",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 44 is labeled NUST Medical Centre.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Medical Centre",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 44,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Opening hours and phone numbers intentionally excluded pending verification",
+        "Building location not found",
+        "No physiotherapy or rehabilitation service found",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate building; entrances; ramp; washroom; ambulance access"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "A named, numbered building (purple 'other' group)",
+          "relativePlacement": "Right-hand half of the illustration, close to #41 NSTP and between it and clusters marked #15 (Faculty & Staff Residential Area)",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-hostels-h12",
+      "name": "H-12 hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "aggregate",
+      "category": "hostel",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Official hostel-allotment SOP lists 'Especially abled students' as first priority for allotment",
+          "url": "https://campuslife.nust.edu.pk/wp-content/uploads/2025/07/510378613396Hostel_Allotment_SOPs.pdf",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Allotment priority does not show any hostel is accessible",
+        "Hostel counts differ across documents (11M/6F; 8M/9F; blog says 18)",
+        "Per-hostel records not yet created",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Per hostel: step-free entrance, ground-floor rooms, lift, accessible bathroom"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-headquarters",
+      "name": "NUST Headquarters",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Wikipedia lists NUST Headquarters among H-12 campus entities",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Secondary source; no building-level location"
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [
+        {
+          "type": "possible_relation_not_confirmed",
+          "recordId": "nust-main-office",
+          "reason": "Possible alternate name; not confirmed by guide."
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-sada",
+      "name": "School of Art, Design and Architecture (SADA)",
+      "aliases": [
+        "School of Art, Design & Architecture (SADA)"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        6
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Counselling centre page places its office in the SADA Building, H-12",
+          "url": "https://c3a.nust.edu.pk/counselling-services/for-appointment/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "Visit our Centre in SADA Building, H-12",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Wikipedia lists the School of Art Design and Architecture on the H-12 campus",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 6 is labeled School of Art, Design & Architecture (SADA).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Art, Design & Architecture (SADA)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 6,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Footprint and entrances unknown",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey.",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate entrances; lift; washrooms"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Numbered building drawn beside the yellow Margalla Cafe marker and a Basketball Court label",
+          "relativePlacement": "Margalla Cafe; #39 Concordia 1 close by; an 'IESE' text label nearby",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-cafeteria-c1",
+      "name": "Cafeteria C-1 (Concordia-1)",
+      "aliases": [
+        "Concordia 1"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [
+        39
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Wikipedia describes C-1 and C-2 as round buildings with food and shops",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 39 is labeled Concordia 1.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Concordia 1",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 39,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Secondary source",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Numbered building at top-centre, close to Margalla Cafe and #6 SADA",
+          "relativePlacement": "Margalla Cafe, #6 SADA, Coffee Lounge marker not far",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-cafeteria-c2",
+      "name": "Cafeteria C-2 (Concordia-2)",
+      "aliases": [
+        "Concordia 2"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [
+        40
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Wikipedia describes C-1 and C-2 as round buildings with food and shops",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Guide legend marker 40 is labeled Concordia 2.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Concordia 2",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 40,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Secondary source",
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "guidePlacementNotes": [
+        {
+          "description": "Numbered building left of centre, beside the RIMMS and IGIS labels",
+          "relativePlacement": "RIMMS, IGIS labels; #9 SEECS nearby",
+          "source": "guide-legend.json",
+          "notGeoreferenced": true
+        }
+      ],
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-cafeteria-c3",
+      "name": "Cafeteria C-3",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Wikipedia says C-3 overlooks the sports complex",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Secondary source"
+      ],
+      "fieldChecksNeeded": [
+        "Locate and survey"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-cafeteria-c4",
+      "name": "Cafeteria C-4",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Wikipedia says C-4 mainly serves SNS and SMME students",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Secondary source; one blog says only three cafeterias exist"
+      ],
+      "fieldChecksNeeded": [
+        "Confirm it exists; locate"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-sports-complex-1-multipurpose-hall",
+      "name": "Sports Complex-I Multipurpose Hall",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "NUST Facebook page snippet names this hall as a championship venue",
+          "url": "https://www.facebook.com/nustofficial/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Social-media snippet only; relation to OSM 'NUST Sports Complex' unconfirmed",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate entrances; spectator access; washrooms"
+      ],
+      "relationships": [
+        {
+          "type": "possible_relation_not_confirmed",
+          "recordId": "nust-guide-14",
+          "reason": "Hall may be a component or separate facility; equivalence unconfirmed."
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-sports-complex",
+      "name": "NUST Sports Complex (OSM way 283405470)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 283405470 as NUST Sports Complex with Plus Code 8J5JJXC4+FM",
+          "url": "https://mapcarta.com/W283405470",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Wikipedia says C-3 cafeteria overlooks the sports complex",
+          "url": "https://en.wikipedia.org/wiki/National_University_of_Sciences_and_Technology_(Pakistan)",
+          "sourceType": "map",
+          "evidenceAccess": "full_page",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "needs-location.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Plus Code decodes to roughly 4005 m from the campus-centre point (south-west); campus boundary not confirmed, so this may be outside H-12 or mis-located; withheld from the map file",
+        "OSM tags not visible in the excerpt",
+        "Not confirmed to be the same object as 'Sports Complex-I' in NUST social posts",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Confirm location and campus boundary before mapping"
+      ],
+      "relationships": [
+        {
+          "type": "possible_relation_not_confirmed",
+          "recordId": "nust-guide-14",
+          "reason": "Name match only; OSM coordinate conflicts with claimed campus location."
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-accessibility-committee",
+      "name": "NUST Accessibility Committee",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "service",
+      "category": "committee",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Student Affairs page says a six-member Accessibility Committee is functional at H-12 under the Student Affairs Directorate",
+          "url": "https://sa.nust.edu.pk/accessibility-committee/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "The committee has been established at NUST, H-12 Campus, Islamabad",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "support-resources.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Page could not be fetched in full (bot detection); excerpt only",
+        "Member names and emails deliberately not recorded",
+        "Page also mentions a list of school Disability Coordinators; list not seen",
+        "A committee existing is not evidence of any physical accessibility",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "reportedPhysicalLocation": null,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-c3a-counselling",
+      "name": "Centre for Counselling and Career Advisory (C3A)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "service",
+      "category": "counselling",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "C3A page places the centre's office in the SADA Building, H-12",
+          "url": "https://c3a.nust.edu.pk/counselling-services/for-appointment/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "support-resources.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "C3A FAQ says counselling is free of cost and psychiatric referral goes through the Medical Centre",
+          "url": "https://c3a.nust.edu.pk/counselling-services/counselling-facilities/individual-counselling/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "support-resources.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Phone numbers and opening hours excluded pending verification",
+        "Entrance and floor within SADA unknown",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "reported_located_in",
+          "recordId": "nust-sada",
+          "evidenceAccess": "search_snippet",
+          "confirmed": false
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "reportedPhysicalLocation": "SADA Building (no point yet)",
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-hostel-priority-especially-abled",
+      "name": "Hostel allotment priority for especially abled students",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "policy",
+      "category": "policy",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Hostel-allotment SOP lists 'Especially abled students' as first priority",
+          "url": "https://campuslife.nust.edu.pk/wp-content/uploads/2025/07/510378613396Hostel_Allotment_SOPs.pdf",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "support-resources.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Policy only; says nothing about hostel accessibility",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "reportedPhysicalLocation": null,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "hec-accessibility-framework-reference",
+      "name": "HEC requirement for a disability policy and committee",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "policy",
+      "category": "policy-reference",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Student Affairs page says the HEC regulatory framework requires HEIs to have a disability policy and Accessibility Committee",
+          "url": "https://sa.nust.edu.pk/accessibility-committee/",
+          "sourceType": "official",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "support-resources.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "The HEC framework text itself was not located or read",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "reportedPhysicalLocation": null,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-convocation-ground",
+      "name": "NUST Convocation Ground",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [
+        "nust-convocation-ground-coordinate"
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 1152594082 as grassland named NUST Convocation Ground with coordinates 33.64285, 72.99229",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "natural=grassland",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "map-ready.geojson",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "Same page notes Mapcarta page text states data is (c) OpenStreetMap contributors under the ODbL; Mapcarta text CC BY-SA 4.0 except photos, directions and map",
+          "url": "https://mapcarta.com/W209836754",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "map-ready.geojson",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Open grass area; a landmark only, not a building or access point",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Confirm surface and edges if used as an event or meeting area"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-gate-16-poi",
+      "name": "Gate 16 NUST (OSM point)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "unresolved_entity",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [
+        "nust-gate-16-poi-coordinate"
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists node 13130495601 named Gate 16 NUST, amenity=university, at 33.64297, 72.98886",
+          "url": "https://mapcarta.com/N13130495601",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "amenity=university",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "map-ready.geojson",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Tagged amenity=university, not as an entrance or barrier node; the name says 'Gate 16' but this record does not establish a gate",
+        "Address shown on the page: Indus Loop",
+        "Sits about 190 m from the campus-centre point, i.e. interior; meaning of 'Gate 16' unclear",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Check what this point represents on the ground"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-seecs-faculty-block",
+      "name": "SEECS Faculty Block",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [
+        "nust-seecs-faculty-block-coordinate"
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 209836754 as a university building named SEECS Faculty Block (Plus Code 8J5JJXVR+57)",
+          "url": "https://mapcarta.com/W209836754",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "building=university",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "map-ready.geojson",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Building centroid only; no entrance location",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Locate entrances; check step-free access, lift, washrooms"
+      ],
+      "relationships": [
+        {
+          "type": "possible_relation_not_confirmed",
+          "recordId": "nust-guide-9",
+          "reason": "Faculty block and whole school are different levels of description; precise relationship unconfirmed."
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-reception-area",
+      "name": "NUST Reception (OSM landuse polygon)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "unresolved_entity",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [
+        "nust-reception-area-coordinate"
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 209868342 as landuse=commercial named NUST Reception (Plus Code 8J5JJXXX+GR)",
+          "url": "https://mapcarta.com/W209868342",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "landuse=commercial",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "inputSource": "map-ready.geojson",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "A landuse=commercial polygon named NUST Reception; not a gate, entrance or reception building point",
+        "Mapcarta says it lies near NPA and the NUST Trail park",
+        "Some evidence is search-snippet-only; original page contents were not independently verified in this consolidation."
+      ],
+      "fieldChecksNeeded": [
+        "Identify the actual reception/visitor entrance and its pedestrian route"
+      ],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "provisional_research_report"
+    },
+    {
+      "id": "nust-guide-1",
+      "name": "Atta-ur-Rahman School of Applied Biosciences (ASAB)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        1
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 1 is labeled Atta-ur-Rahman School of Applied Biosciences (ASAB).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Atta-ur-Rahman School of Applied Biosciences (ASAB)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 1,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-2",
+      "name": "Centre for International Peace & Stability (CIPS)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        2
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 2 is labeled Centre for International Peace & Stability (CIPS).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Centre for International Peace & Stability (CIPS)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 2,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-3",
+      "name": "NUST Business School (NBS)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        3
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 3 is labeled NUST Business School (NBS).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Business School (NBS)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 3,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-4",
+      "name": "NUST Institute of Peace & Conflict Studies (NIPCONS)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        4
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 4 is labeled NUST Institute of Peace & Conflict Studies (NIPCONS).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Institute of Peace & Conflict Studies (NIPCONS)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 4,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-5",
+      "name": "School of Interdisciplinary Engineering & Sciences (SINES)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        5
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 5 is labeled School of Interdisciplinary Engineering & Sciences (SINES).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Interdisciplinary Engineering & Sciences (SINES)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 5,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-7",
+      "name": "School of Chemical & Materials Engineering (SCME)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        7
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 7 is labeled School of Chemical & Materials Engineering (SCME).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Chemical & Materials Engineering (SCME)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 7,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-8",
+      "name": "School of Civil & Environmental Engineering (SCEE/IESE)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        8
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 8 is labeled School of Civil & Environmental Engineering (SCEE/IESE).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Civil & Environmental Engineering (SCEE/IESE)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 8,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-9",
+      "name": "School of Electrical Engineering & Computer Science (SEECS)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        9
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 9 is labeled School of Electrical Engineering & Computer Science (SEECS).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Electrical Engineering & Computer Science (SEECS)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 9,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-10",
+      "name": "School of Mechanical & Manufacturing Engineering (SMME/MRC)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        10
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 10 is labeled School of Mechanical & Manufacturing Engineering (SMME/MRC).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Mechanical & Manufacturing Engineering (SMME/MRC)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 10,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-11",
+      "name": "School of Natural Sciences (SNS)",
+      "aliases": [
+        "SNS"
+      ],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        11
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 11 is labeled School of Natural Sciences (SNS).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Natural Sciences (SNS)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 11,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        },
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"SNS\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "SNS",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-12",
+      "name": "School of Social Sciences & Humanities (S3H)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        12
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 12 is labeled School of Social Sciences & Humanities (S3H).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "School of Social Sciences & Humanities (S3H)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 12,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-13",
+      "name": "US Pakistan Centre for Advanced Studies in Energy (USPCAS-E)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        13
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 13 is labeled US Pakistan Centre for Advanced Studies in Energy (USPCAS-E).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "US Pakistan Centre for Advanced Studies in Energy (USPCAS-E)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 13,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-14",
+      "name": "NUST Sports Complex",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        14
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 14 is labeled NUST Sports Complex.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Sports Complex",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 14,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-15",
+      "name": "Faculty & Staff Residential Area",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        15
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 15 is labeled Faculty & Staff Residential Area.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Faculty & Staff Residential Area",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 15,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-18",
+      "name": "Administration Block",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        18
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 18 is labeled Administration Block.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Administration Block",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 18,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-19",
+      "name": "Central Mosque",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        19
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 19 is labeled Central Mosque.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Central Mosque",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 19,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-20",
+      "name": "NUST Creative Learning School & College (NCLS&C)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        20
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 20 is labeled NUST Creative Learning School & College (NCLS&C).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Creative Learning School & College (NCLS&C)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 20,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-21",
+      "name": "Hiking Trail",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        21
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 21 is labeled Hiking Trail.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Hiking Trail",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 21,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-22",
+      "name": "N-ovative Health Technologies (NHT)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        22
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 22 is labeled N-ovative Health Technologies (NHT).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "N-ovative Health Technologies (NHT)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 22,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-25",
+      "name": "Zainab Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        25
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 25 is labeled Zainab Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Zainab Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 25,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-26",
+      "name": "Ayesha Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        26
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 26 is labeled Ayesha Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Ayesha Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 26,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-27",
+      "name": "Amna Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        27
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 27 is labeled Amna Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Amna Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 27,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-28",
+      "name": "Maryam Block",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        28
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 28 is labeled Maryam Block.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Maryam Block",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 28,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-29",
+      "name": "Fatima Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        29
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 29 is labeled Fatima Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Fatima Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 29,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-30",
+      "name": "Rumi Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        30
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 30 is labeled Rumi Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Rumi Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 30,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-31",
+      "name": "Ghazali Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        31
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 31 is labeled Ghazali Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Ghazali Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 31,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-32",
+      "name": "Attar Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        32
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 32 is labeled Attar Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Attar Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 32,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-33",
+      "name": "Razi Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        33
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 33 is labeled Razi Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Razi Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 33,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-34",
+      "name": "Zakaria Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        34
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 34 is labeled Zakaria Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Zakaria Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 34,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-35",
+      "name": "Hajveri Hostels",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "hostel",
+      "guideMarkers": [
+        35
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 35 is labeled Hajveri Hostels.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Hajveri Hostels",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 35,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [
+        {
+          "type": "member_of_aggregate",
+          "recordId": "nust-hostels-h12"
+        }
+      ],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-36",
+      "name": "Bhitai Mess I",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [
+        36
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 36 is labeled Bhitai Mess I.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Bhitai Mess I",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 36,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-37",
+      "name": "Bhitai Mess II",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [
+        37
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 37 is labeled Bhitai Mess II.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Bhitai Mess II",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 37,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-38",
+      "name": "Gymnasium",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        38
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 38 is labeled Gymnasium.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Gymnasium",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 38,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-41",
+      "name": "National Science & Technology Park (NSTP)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        41
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 41 is labeled National Science & Technology Park (NSTP).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "National Science & Technology Park (NSTP)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 41,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-42",
+      "name": "National Centre for Artificial Intelligence (NCAI)",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "academic",
+      "guideMarkers": [
+        42
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 42 is labeled National Centre for Artificial Intelligence (NCAI).",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "National Centre for Artificial Intelligence (NCAI)",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 42,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-43",
+      "name": "Riding Club",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        43
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 43 is labeled Riding Club.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Riding Club",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 43,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-45",
+      "name": "Bank",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        45
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 45 is labeled Bank.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Bank",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 45,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-46",
+      "name": "NUST Press",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [
+        46
+      ],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "Guide legend marker 46 is labeled NUST Press.",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "NUST Press",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "marker": 46,
+          "scope": "Name and schematic placement only; no GPS or accessibility evidence.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [
+        "Guide is a perspective illustration with 2022 file metadata, not a current georeferenced or accessibility survey."
+      ],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-srinagar-highway",
+      "name": "Srinagar Highway",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "road",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Srinagar Highway\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Srinagar Highway",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": "Printed along the top edge of the illustration",
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-iqbal-square",
+      "name": "Iqbal Square",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Iqbal Square\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Iqbal Square",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-luqman-avenue",
+      "name": "Luqman Avenue",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "road",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Luqman Avenue\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Luqman Avenue",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-margalla-cafe",
+      "name": "Margalla Cafe",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Margalla Cafe\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Margalla Cafe",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-coffee-lounge",
+      "name": "Coffee Lounge",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Coffee Lounge\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Coffee Lounge",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-retro-cafe",
+      "name": "Retro Cafe",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Retro Cafe\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Retro Cafe",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-buddies-cafe",
+      "name": "Buddies Cafe",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "food",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"Buddies Cafe\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "Buddies Cafe",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    },
+    {
+      "id": "nust-guide-label-iqra-apartments",
+      "name": "IQRA Apartments",
+      "aliases": [],
+      "campus": "NUST H-12 Islamabad",
+      "kind": "place",
+      "category": "other",
+      "guideMarkers": [],
+      "coordinates": null,
+      "coordinateCandidateIds": [],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "evidence": [
+        {
+          "claim": "The supplied campus guide includes the unnumbered label \"IQRA Apartments\".",
+          "sourceId": "user-campus-guide",
+          "evidenceAccess": "supplied_document",
+          "excerpt": "IQRA Apartments",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26",
+          "note": null,
+          "scope": "Schematic label only.",
+          "inputSource": "guide-legend.json",
+          "independentlyRechecked": false
+        }
+      ],
+      "limitations": [],
+      "fieldChecksNeeded": [],
+      "relationships": [],
+      "provisional": true,
+      "publicMapEligible": false,
+      "existenceEvidenceStatus": "guide_documented_historical"
+    }
+  ],
+  "uncertainCoordinates": [
+    {
+      "id": "nust-convocation-ground-coordinate",
+      "recordId": "nust-convocation-ground",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.99229,
+          33.64285
+        ]
+      },
+      "coordinateMetadata": {
+        "precision": "source-provided",
+        "method": "OSM feature coordinate as printed on Mapcarta (way representative point, not an entrance)",
+        "sourceUrl": "https://mapcarta.com/W1152594082",
+        "openLocationCode": "8J5JJXVR+4W",
+        "distanceFromCampusCentreM": 336
+      },
+      "osm": {
+        "type": "way",
+        "id": 1152594082,
+        "canonicalUrl": "https://www.openstreetmap.org/way/1152594082",
+        "canonicalUrlOpened": false,
+        "tagsSeen": {
+          "natural": "grassland"
+        },
+        "tagsComplete": false,
+        "retrievedVia": "Mapcarta page excerpt seen in web search results (OSM-derived; OSM object itself not opened)",
+        "retrievalDate": "2026-10-26"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 1152594082 as grassland named NUST Convocation Ground with coordinates 33.64285, 72.99229",
+          "url": "https://mapcarta.com/W1152594082",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "natural=grassland",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26"
+        },
+        {
+          "claim": "Same page notes Mapcarta page text states data is (c) OpenStreetMap contributors under the ODbL; Mapcarta text CC BY-SA 4.0 except photos, directions and map",
+          "url": "https://mapcarta.com/W209836754",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": null,
+          "publicationDate": null,
+          "accessedDate": "2026-10-26"
+        }
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Open grass area; a landmark only, not a building or access point"
+      ],
+      "publicMapEligible": false,
+      "reviewDisposition": "provisional_landmark_candidate_only",
+      "reason": "Snippet-derived coordinate; campus membership and precise feature location not independently verified."
+    },
+    {
+      "id": "nust-gate-16-poi-coordinate",
+      "recordId": "nust-gate-16-poi",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.98886,
+          33.64297
+        ]
+      },
+      "coordinateMetadata": {
+        "precision": "source-provided",
+        "method": "OSM node coordinate as printed on Mapcarta",
+        "sourceUrl": "https://mapcarta.com/N13130495601",
+        "openLocationCode": "8J5JJXVQ+5G",
+        "distanceFromCampusCentreM": 202
+      },
+      "osm": {
+        "type": "node",
+        "id": 13130495601,
+        "canonicalUrl": "https://www.openstreetmap.org/node/13130495601",
+        "canonicalUrlOpened": false,
+        "tagsSeen": {
+          "amenity": "university"
+        },
+        "tagsComplete": false,
+        "retrievedVia": "Mapcarta page excerpt seen in web search results (OSM-derived; OSM object itself not opened)",
+        "retrievalDate": "2026-10-26"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists node 13130495601 named Gate 16 NUST, amenity=university, at 33.64297, 72.98886",
+          "url": "https://mapcarta.com/N13130495601",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "amenity=university",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26"
+        }
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Tagged amenity=university, not as an entrance or barrier node; the name says 'Gate 16' but this record does not establish a gate",
+        "Address shown on the page: Indus Loop",
+        "Sits about 190 m from the campus-centre point, i.e. interior; meaning of 'Gate 16' unclear"
+      ],
+      "publicMapEligible": false,
+      "reviewDisposition": "exclude_from_public_map",
+      "reason": "Identity/type unresolved; must not be presented as an entrance or reception building."
+    },
+    {
+      "id": "nust-seecs-faculty-block-coordinate",
+      "recordId": "nust-seecs-faculty-block",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.990688,
+          33.642937
+        ]
+      },
+      "coordinateMetadata": {
+        "precision": "approximate",
+        "method": "Open Location Code printed by Mapcarta decoded to cell centre (about 14 m cell); way representative point, not an entrance",
+        "sourceUrl": "https://mapcarta.com/W209836754",
+        "openLocationCode": "8J5JJXVR+57",
+        "distanceFromCampusCentreM": 229
+      },
+      "osm": {
+        "type": "way",
+        "id": 209836754,
+        "canonicalUrl": "https://www.openstreetmap.org/way/209836754",
+        "canonicalUrlOpened": false,
+        "tagsSeen": {
+          "building": "university"
+        },
+        "tagsComplete": false,
+        "retrievedVia": "Mapcarta page excerpt seen in web search results (OSM-derived; OSM object itself not opened)",
+        "retrievalDate": "2026-10-26"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 209836754 as a university building named SEECS Faculty Block (Plus Code 8J5JJXVR+57)",
+          "url": "https://mapcarta.com/W209836754",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "building=university",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26"
+        }
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "Building centroid only; no entrance location"
+      ],
+      "publicMapEligible": false,
+      "reviewDisposition": "provisional_landmark_candidate_only",
+      "reason": "Snippet-derived coordinate; campus membership and precise feature location not independently verified."
+    },
+    {
+      "id": "nust-reception-area-coordinate",
+      "recordId": "nust-reception-area",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.999562,
+          33.648812
+        ]
+      },
+      "coordinateMetadata": {
+        "precision": "approximate",
+        "method": "Open Location Code printed by Mapcarta decoded to cell centre (about 14 m cell); polygon representative point",
+        "sourceUrl": "https://mapcarta.com/W209868342",
+        "openLocationCode": "8J5JJXXX+GR",
+        "distanceFromCampusCentreM": 1042
+      },
+      "osm": {
+        "type": "way",
+        "id": 209868342,
+        "canonicalUrl": "https://www.openstreetmap.org/way/209868342",
+        "canonicalUrlOpened": false,
+        "tagsSeen": {
+          "landuse": "commercial"
+        },
+        "tagsComplete": false,
+        "retrievedVia": "Mapcarta page excerpt seen in web search results (OSM-derived; OSM object itself not opened)",
+        "retrievalDate": "2026-10-26"
+      },
+      "evidence": [
+        {
+          "claim": "Mapcarta lists way 209868342 as landuse=commercial named NUST Reception (Plus Code 8J5JJXXX+GR)",
+          "url": "https://mapcarta.com/W209868342",
+          "sourceType": "map",
+          "evidenceAccess": "search_snippet",
+          "excerpt": "landuse=commercial",
+          "publicationDate": null,
+          "accessedDate": "2026-10-26"
+        }
+      ],
+      "accessibility": {
+        "stepFreeEntrance": "unknown",
+        "ramp": "unknown",
+        "lift": "unknown",
+        "accessibleWashroom": "unknown",
+        "accessibleParking": "unknown"
+      },
+      "limitations": [
+        "Coordinates are OSM-derived but taken from a third-party mirror's search excerpt, not from OSM or Overpass directly",
+        "Campus boundary not confirmed from OSM; membership in H-12 inferred from place name and distance from campus centre",
+        "OSM accessibility data, where it exists, is reported map data not field verification",
+        "A landuse=commercial polygon named NUST Reception; not a gate, entrance or reception building point",
+        "Mapcarta says it lies near NPA and the NUST Trail park"
+      ],
+      "publicMapEligible": false,
+      "reviewDisposition": "exclude_from_public_map",
+      "reason": "Identity/type unresolved; must not be presented as an entrance or reception building."
+    }
+  ],
+  "unresolvedResearch": [
+    {
+      "id": "nust-rehabilitation-therapy",
+      "issue": "Existence not established; not a directory facility. Absence of search results is not evidence of nonexistence.",
+      "sourceRecord": {
+        "id": "nust-rehabilitation-therapy",
+        "name": "Rehabilitation / therapy services",
+        "type": "not-found",
+        "campus": "NUST H-12 Islamabad",
+        "physicalLocation": null,
+        "coordinates": null,
+        "evidence": [],
+        "provisional": true,
+        "notes": [
+          "No evidence of an on-campus physiotherapy or rehabilitation service was found; absence in search is not proof it does not exist"
+        ]
+      }
+    },
+    {
+      "id": "nust-headquarters-identity",
+      "recordIds": [
+        "nust-headquarters",
+        "nust-main-office"
+      ],
+      "issue": "Possible alternate name; not confirmed by guide."
+    },
+    {
+      "id": "nust-sports-complex-identity",
+      "recordIds": [
+        "nust-sports-complex",
+        "nust-guide-14"
+      ],
+      "issue": "Name match only; OSM coordinate conflicts with claimed campus location."
+    },
+    {
+      "id": "nust-sports-complex-1-multipurpose-hall-identity",
+      "recordIds": [
+        "nust-sports-complex-1-multipurpose-hall",
+        "nust-guide-14"
+      ],
+      "issue": "Hall may be a component or separate facility; equivalence unconfirmed."
+    },
+    {
+      "id": "nust-seecs-faculty-block-identity",
+      "recordIds": [
+        "nust-seecs-faculty-block",
+        "nust-guide-9"
+      ],
+      "issue": "Faculty block and whole school are different levels of description; precise relationship unconfirmed."
+    }
+  ],
+  "unresolvedGuideLabels": [
+    {
+      "label": "IESE, RIMMS, IGIS, RIC",
+      "kind": "building labels"
+    },
+    {
+      "label": "Football/Cricket Ground; Football Ground; Cricket Ground (two); Tennis Court (two); Basketball Court (two); Squash Court; Swimming Pool; Gymnasium; Climbing Wall; Skating Rink; Family Park",
+      "kind": "sports and recreation labels"
+    },
+    {
+      "label": "Other small road names (e.g. Scholar Avenue, Indus Loop, Chenab Road)",
+      "kind": "road",
+      "note": "Printed very small; readings are tentative, so not recorded as findings"
+    }
+  ],
+  "sourceExclusions": [
+    {
+      "item": "Mapcarta 'NUST' university way 231436562",
+      "reason": "Located in Rawalpindi District (not H-12); excluded"
+    },
+    {
+      "item": "PIEAS Central Library way 539477815",
+      "reason": "Different institution"
+    },
+    {
+      "item": "NUST Zimbabwe pages and library node 4311322489",
+      "reason": "Different university (Bulawayo)"
+    },
+    {
+      "item": "NUML Islamabad accessibility pages",
+      "reason": "Different university"
+    },
+    {
+      "item": "Grokipedia claim of campus audits for ramps, lifts and tactile paving",
+      "reason": "AI-generated, not traced to a primary source"
+    },
+    {
+      "item": "Estimated search-index ages used as publication dates in the previous report",
+      "reason": "Removed; publicationDate is null unless explicit"
+    }
+  ],
+  "summary": {
+    "directoryRecords": 73,
+    "guideMarkersMerged": 46,
+    "uncertainCoordinateCandidates": 4,
+    "excludedCoordinateCandidates": 2,
+    "publicMapEligibleRecords": 0,
+    "verifiedAccessibilityClaims": 0
+  }
+}
